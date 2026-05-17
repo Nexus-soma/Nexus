@@ -67,4 +67,4 @@ A software engineer and computer science student who refused to wait for the fut
 
 ## License
 
-MIT — because companions should be free.
+MIT — because companions should be free

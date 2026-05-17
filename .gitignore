@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+screenshot.png
+test_screenshot.png
+debug_failure.png
+nexus_screenshot.png

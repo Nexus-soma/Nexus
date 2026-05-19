@@ -1,0 +1,38 @@
+{
+  "open_whatsapp": {
+    "successes": 3,
+    "failures": 2,
+    "last_failure": "2026-05-18T00:11:05.951815",
+    "confidence": 0.6,
+    "last_success": "2026-05-18T00:12:40.036752",
+    "best_params": {}
+  },
+  "go_home": {
+    "successes": 5,
+    "failures": 0,
+    "last_success": "2026-05-18T00:12:49.903053",
+    "confidence": 1.0,
+    "best_params": {}
+  },
+  "WhatsApp:search": {
+    "successes": 5,
+    "failures": 3,
+    "x": 360,
+    "y": 236,
+    "confidence": 0.625
+  },
+  "WhatsApp:message": {
+    "successes": 3,
+    "failures": 1,
+    "x": 258,
+    "y": 1511,
+    "confidence": 0.75
+  },
+  "WhatsApp:send": {
+    "successes": 7,
+    "failures": 0,
+    "x": 360,
+    "y": 1456,
+    "confidence": 1.0
+  }
+}

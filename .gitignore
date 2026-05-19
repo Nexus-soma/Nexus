@@ -7,3 +7,23 @@ debug_failure.png
 nexus_screenshot.png
 *.log
 .env
+
+# Windows
+*.exe
+*.dll
+*.msi
+Thumbs.db
+Desktop.ini
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

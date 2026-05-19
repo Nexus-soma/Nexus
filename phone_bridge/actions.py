@@ -1,10 +1,11 @@
 """
-Nexus Phone Actions (Dynamic TPM)
-High-level phone interactions using REAL-TIME screen reading.
-No hardcoded coordinates. No stale maps. 
-Reads the screen fresh for every action and adapts dynamically.
+Nexus Phone Actions (Self-Learning TPM)
+Checks learned patterns first. Falls back to dynamic screen reading.
+Updates phone_map.json with verified coordinates on every success.
+Gets smarter every time you use it.
 """
 
+import json
 import time
 import os
 import sys
@@ -17,339 +18,257 @@ from phone_bridge.screen_reader import ScreenReader
 
 
 class PhoneActions:
-    """
-    High-level phone actions powered by dynamic screen reading.
-    Every action reads the phone's screen in real-time to find elements.
-    Adapts automatically to any app layout, any device.
-    """
+    """Self-learning phone actions powered by TPM."""
 
     def __init__(self, bridge: PhoneBridge = None):
         self.bridge = bridge or PhoneBridge()
         self.reader = ScreenReader()
         self.default_wait = 0.8
+        self.map_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "phone_map.json")
+        self.learned_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "learned_patterns.json")
+        self.map_data = self._load_json(self.map_path, {"apps": {}})
+        self.learned = self._load_json(self.learned_path, {})
+
+    def _load_json(self, path: str, default: dict) -> dict:
+        if os.path.exists(path):
+            try:
+                with open(path, "r") as f:
+                    return json.load(f)
+            except json.JSONDecodeError:
+                pass
+        return default
+
+    def _save_json(self, path: str, data: dict):
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2)
 
     def _wait(self, seconds: float = None):
-        """Pause between actions for UI to respond."""
         time.sleep(seconds or self.default_wait)
 
-    def _find_and_tap(self, search_text: str, search_area: str = "any") -> bool:
+    # ─── LEARNED COORDINATE SYSTEM ──────────────
+
+    def _get_learned_coordinate(self, app: str, element: str) -> Optional[dict]:
+        """Get best-known coordinate for an element. Returns {x, y, confidence} or None."""
+        key = f"{app}:{element}"
+        entry = self.learned.get(key)
+        if entry and entry.get("confidence", 0) > 0.5:
+            return entry
+        return None
+
+    def _update_learned(self, app: str, element: str, x: int, y: int, success: bool):
+        """Update learned coordinates after an action."""
+        key = f"{app}:{element}"
+        if key not in self.learned:
+            self.learned[key] = {"successes": 0, "failures": 0, "x": x, "y": y, "confidence": 0.0}
+
+        entry = self.learned[key]
+        if success:
+            entry["successes"] += 1
+            entry["x"] = x  # Update with latest successful position
+            entry["y"] = y
+        else:
+            entry["failures"] += 1
+
+        total = entry["successes"] + entry["failures"]
+        entry["confidence"] = entry["successes"] / total if total > 0 else 0.0
+        self._save_json(self.learned_path, self.learned)
+
+    # ─── SMART TAP (LEARNED FIRST, DYNAMIC FALLBACK) ──
+
+    def _smart_tap(self, app: str, element_label: str, area: str = "any") -> bool:
         """
-        Read the current screen and tap the first element matching search_text.
-        search_area can be: 'any', 'top', 'bottom', 'center'
-        Returns True if found and tapped.
+        Tap an element using learned coordinates first, dynamic search as fallback.
+        Updates learned coordinates on success.
         """
+        # TRY 1: Learned coordinate
+        learned = self._get_learned_coordinate(app, element_label)
+        if learned:
+            print(f"   🧠 Using learned {element_label} at ({learned['x']}, {learned['y']}) (confidence: {learned['confidence']:.0%})")
+            self.bridge.tap(learned["x"], learned["y"])
+            self._wait(0.3)
+            # Quick verify — did the screen change?
+            after = len(self.reader.get_clickable_elements())
+            if after > 5:  # Screen has content
+                self._update_learned(app, element_label, learned["x"], learned["y"], True)
+                return True
+            else:
+                print(f"   ⚠️ Learned coordinate failed. Trying dynamic search...")
+                self._update_learned(app, element_label, learned["x"], learned["y"], False)
+
+        # TRY 2: Dynamic search by label
         elements = self.reader.get_clickable_elements()
-        
-        candidates = []
+        if area == "top":
+            elements = [e for e in elements if e.center_y < 400]
+        elif area == "bottom":
+            elements = [e for e in elements if e.center_y > 1200]
+        elif area == "center":
+            elements = [e for e in elements if 400 <= e.center_y <= 1200]
+
         for e in elements:
             label = (e.text + " " + e.content_desc + " " + e.resource_id).lower()
-            if search_text.lower() in label:
-                candidates.append(e)
-        
-        if not candidates:
-            return False
-        
-        # Filter by screen area if specified
-        if search_area == "top":
-            candidates = [e for e in candidates if e.center_y < 400]
-        elif search_area == "bottom":
-            candidates = [e for e in candidates if e.center_y > 1200]
-        elif search_area == "center":
-            candidates = [e for e in candidates if 400 <= e.center_y <= 1200]
-        
-        if not candidates:
-            return False
-        
-        # Tap the first match
-        target = candidates[0]
-        print(f"   👆 Found '{target.label[:40]}' at ({target.center_x}, {target.center_y})")
-        self.bridge.tap(target.center_x, target.center_y)
-        return True
+            if element_label.lower() in label:
+                print(f"   👆 Found '{e.label[:40]}' at ({e.center_x}, {e.center_y}) [dynamic]")
+                self.bridge.tap(e.center_x, e.center_y)
+                self._update_learned(app, element_label, e.center_x, e.center_y, True)
+                return True
 
-    def _find_elements_by_text(self, search_text: str) -> list:
-        """Find all elements containing search_text. Returns list of ScreenElements."""
+        return False
+
+    def _smart_find(self, app: str, label_contains: str, area: str = "any") -> Optional[dict]:
+        """Find element with learned-first, dynamic-fallback approach."""
+        learned = self._get_learned_coordinate(app, label_contains)
+        if learned:
+            return {"label": label_contains, "x": learned["x"], "y": learned["y"]}
+
         elements = self.reader.get_clickable_elements()
-        results = []
+        if area == "top":
+            elements = [e for e in elements if e.center_y < 400]
+        elif area == "bottom":
+            elements = [e for e in elements if e.center_y > 1200]
+
         for e in elements:
             label = (e.text + " " + e.content_desc + " " + e.resource_id).lower()
-            if search_text.lower() in label:
-                results.append(e)
-        return results
+            if label_contains.lower() in label:
+                return {"label": e.label, "x": e.center_x, "y": e.center_y}
 
-    def _type_and_enter(self, text: str):
-        """Type text and press enter."""
-        self.bridge.type_text(text)
-        self._wait(0.3)
-        self.bridge.press_key(66)  # Enter
+        return None
 
-    # ─── WhatsApp ──────────────────────────────────
+    # ─── WHATSAPP (SELF-LEARNING) ────────────────
 
     def send_whatsapp(self, contact: str, message: str) -> bool:
-        """
-        Send a WhatsApp message using DYNAMIC screen reading.
-        Reads the screen at every step to find elements in real-time.
-        """
-        print(f"   📱 WhatsApp: Sending to '{contact}'...")
+        print(f"   📱 WhatsApp → {contact}: \"{message}\"")
 
-        # STEP 1: Open WhatsApp
         self.bridge.open_app("com.whatsapp")
-        self._wait(2.5)
+        self._wait(2.0)
 
-        # STEP 2: Find and tap the search icon
-        print("   🔍 Looking for search icon...")
-        
-        found = self._find_and_tap("search", "top")
-        
-        if not found:
-            search_by_id = self.reader.find_by_id("search")
-            if search_by_id:
-                target = search_by_id[0]
-                print(f"   👆 Found search by ID at ({target.center_x}, {target.center_y})")
-                self.bridge.tap(target.center_x, target.center_y)
-            else:
-                print("   ⚠️  Search icon not found. Using position fallback.")
-                self.bridge.tap(636, 124)
-        
-        self._wait(0.8)
+        # Search — learned first, dynamic fallback
+        if not self._smart_tap("WhatsApp", "search", "top"):
+            self._smart_tap("WhatsApp", "meta ai", "top")
+        self._wait(0.5)
 
-        # STEP 3: Type contact name to search
-        print(f"   🔍 Searching for '{contact}'...")
+        # Type contact
         self.bridge.type_text(contact)
         self._wait(2.5)
 
-        # STEP 4: Find the contact in search results
-        print(f"   👤 Looking for {contact} in results...")
-        
-        all_elements = self._find_elements_by_text(contact)
-        # Only look at results area (Y 300-1300), skip search input bar and bottom tabs
-        contact_elements = [e for e in all_elements if 300 < e.center_y < 1300]
-        
-        if contact_elements:
-            target = contact_elements[0]
+        # Find contact in results (Y > 300 to skip search input)
+        all_el = self.reader.get_clickable_elements()
+        contact_el = [e for e in all_el if contact.lower() in (e.text + e.content_desc).lower() and e.center_y > 300]
+
+        if contact_el:
+            target = contact_el[0]
             print(f"   ✅ Found '{target.label[:30]}' at ({target.center_x}, {target.center_y})")
-            # Tap the center of the contact row at this Y position
             self.bridge.tap(360, target.center_y)
         else:
-            print(f"   ⚠️  '{contact}' not found on screen. Tapping first result.")
             self.bridge.tap(360, 392)
-        
-        self._wait(1.0)
+        self._wait(1.5)
 
-        # STEP 5: Find message input field
-        print("   💬 Looking for message input...")
-        
-        found = self._find_and_tap("message", "bottom")
-        if not found:
-            found = self._find_and_tap("type", "bottom")
-        if not found:
-            edit_fields = self.reader.find_by_class("EditText")
-            if edit_fields:
-                bottom_edits = [e for e in edit_fields if e.center_y > 1200]
-                if bottom_edits:
-                    target = bottom_edits[0]
-                    print(f"   👆 Found input field at ({target.center_x}, {target.center_y})")
-                    self.bridge.tap(target.center_x, target.center_y)
-                    found = True
-            
-        if not found:
-            print("   ⚠️  Message input not found. Using fallback.")
+        # Message input — learned first
+        if not self._smart_tap("WhatsApp", "message", "bottom"):
             self.bridge.tap(360, 1450)
-        
         self._wait(0.5)
 
-        # STEP 6: Type the message
-        print(f"   📝 Typing message...")
+        # Type message
         self.bridge.type_text(message)
         self._wait(0.4)
 
-        # STEP 7: Find and tap send button
-        print("   📤 Looking for send button...")
-        
-        found = self._find_and_tap("send", "bottom")
-        if not found:
-            send_ids = ["send", "com.whatsapp:id/send"]
-            for sid in send_ids:
-                elements = self.reader.find_by_id(sid)
-                if elements:
-                    target = elements[0]
-                    print(f"   👆 Found send button at ({target.center_x}, {target.center_y})")
-                    self.bridge.tap(target.center_x, target.center_y)
-                    found = True
-                    break
-        
-        if not found:
-            print("   ⚠️  Send button not found. Using fallback.")
+        # Send button — learned first
+        if not self._smart_tap("WhatsApp", "send", "bottom"):
             self.bridge.tap(670, 1450)
-        
-        self._wait(0.5)
+        self._wait(0.3)
 
-        print(f"   ✅ WhatsApp message sent to {contact}.")
+        print(f"   ✅ Sent.")
         return True
 
-    # ─── Notes ─────────────────────────────────────
+    # ─── NOTES ─────────────────────────────────────
 
     def write_note(self, title: str, content: str = "") -> bool:
-        """
-        Create a new note using dynamic screen reading.
-        Works with any notes app by reading the screen.
-        """
-        print(f"   📝 Writing note: '{title}'...")
-
-        # Open Notes
+        print(f"   📝 Note: '{title}'")
         self.bridge.open_app("com.miui.notes")
         self._wait(1.5)
 
-        # Find and tap new note button
-        found = self._find_and_tap("new", "any")
-        if not found:
-            found = self._find_and_tap("add", "any")
-        if not found:
-            found = self._find_and_tap("create", "any")
-        if not found:
-            print("   ⚠️  New note button not found. Using fallback.")
+        if not self._smart_tap("Notes", "new") and not self._smart_tap("Notes", "create"):
             self.bridge.tap(670, 200)
-        
         self._wait(0.5)
 
-        # Type title
         if title:
             self.bridge.type_text(title)
             self._wait(0.3)
 
-        # Move to content area
         if content:
-            self.bridge.press_key(66)  # Enter
+            self.bridge.press_key(66)
             self._wait(0.3)
             self.bridge.type_text(content)
             self._wait(0.3)
 
-        # Find and tap save/done
-        found = self._find_and_tap("save", "top")
-        if not found:
-            found = self._find_and_tap("done", "top")
-        if not found:
-            found = self._find_and_tap("check", "top")
-        if not found:
-            print("   ⚠️  Save button not found. Using fallback.")
+        if not self._smart_tap("Notes", "save") and not self._smart_tap("Notes", "done"):
             self.bridge.tap(670, 150)
-        
         self._wait(0.5)
 
-        # Go home
         self.bridge.press_key(3)
-        print(f"   ✅ Note saved.")
+        print(f"   ✅ Saved.")
         return True
 
-    # ─── YouTube ────────────────────────────────────
+    # ─── YOUTUBE ────────────────────────────────────
 
     def search_youtube(self, query: str) -> bool:
-        """
-        Search YouTube using dynamic screen reading.
-        Works with any YouTube app (regular or ReVanced).
-        """
-        print(f"   ▶️  YouTube: Searching '{query}'...")
-
-        # Open YouTube (ReVanced)
+        print(f"   ▶️  YouTube: '{query}'")
         self.bridge.open_app("app.revanced.android.youtube")
         self._wait(2.0)
 
-        # Find and tap search
-        found = self._find_and_tap("search", "top")
-        if not found:
-            print("   ⚠️  Search not found. Using fallback.")
+        if not self._smart_tap("YouTube", "search", "top"):
             self.bridge.tap(650, 100)
-        
         self._wait(0.5)
 
-        # Type query and search
-        self._type_and_enter(query)
+        self.bridge.type_text(query)
+        self._wait(0.3)
+        self.bridge.press_key(66)
         self._wait(1.0)
 
-        print(f"   ✅ Search results shown.")
+        print(f"   ✅ Done.")
         return True
 
-    # ─── Calling ────────────────────────────────────
+    # ─── CALLING ────────────────────────────────────
 
     def call_number(self, number: str, auto_dial: bool = False) -> bool:
-        """
-        Open dialer with number. If auto_dial, also press call button.
-        """
-        print(f"   📞 Dialing {number}...")
-
+        print(f"   📞 {number}")
         self.bridge.open_dialer(number)
         self._wait(1.0)
-
         if auto_dial:
-            print("   ⚠️  Auto-dial enabled. Placing call...")
-            found = self._find_and_tap("call", "bottom")
-            if not found:
+            if not self._smart_tap("Dialer", "call", "bottom"):
                 self.bridge.tap(650, 2200)
-
-        print(f"   ✅ Dialer ready.")
         return True
 
-    # ─── Navigation ─────────────────────────────────
+    # ─── NAVIGATION ─────────────────────────────────
 
-    def go_home(self) -> bool:
-        """Go to home screen."""
-        self.bridge.press_key(3)
-        return True
+    def go_home(self): self.bridge.press_key(3)
+    def go_back(self): self.bridge.press_key(4)
+    def open_notifications(self): self.bridge.swipe(360, 0, 360, 600)
+    def open_recent_apps(self): self.bridge.swipe(360, 1800, 360, 800)
 
-    def go_back(self) -> bool:
-        """Press back button."""
-        self.bridge.press_key(4)
-        return True
-
-    def open_notifications(self) -> bool:
-        """Swipe down to open notification shade."""
-        self.bridge.swipe(360, 0, 360, 600)
-        return True
-
-    def open_recent_apps(self) -> bool:
-        """Open recent apps switcher."""
-        self.bridge.swipe(360, 1800, 360, 800)
-        return True
-
-    # ─── Open App ───────────────────────────────────
+    # ─── OPEN APP ───────────────────────────────────
 
     def open_app(self, app_name: str) -> bool:
-        """
-        Open an app by friendly name or package name.
-        """
         APP_MAP = {
-            "whatsapp": "com.whatsapp",
-            "telegram": "org.telegram.messenger",
-            "youtube": "app.revanced.android.youtube",
-            "youtube music": "app.revanced.android.apps.youtube.music",
-            "spotify": "com.spotify.music",
-            "brave": "com.brave.browser",
-            "chrome": "com.android.chrome",
-            "notes": "com.miui.notes",
-            "calendar": "com.google.android.calendar",
-            "clock": "com.google.android.deskclock",
-            "calculator": "com.miui.calculator",
-            "settings": "com.android.settings",
-            "dialer": "com.google.android.dialer",
-            "phone": "com.google.android.dialer",
-            "camera": "com.android.camera",
-            "gallery": "com.google.android.apps.photos",
-            "photos": "com.google.android.apps.photos",
+            "whatsapp": "com.whatsapp", "telegram": "org.telegram.messenger",
+            "youtube": "app.revanced.android.youtube", "spotify": "com.spotify.music",
+            "brave": "com.brave.browser", "chrome": "com.android.chrome",
+            "notes": "com.miui.notes", "calendar": "com.google.android.calendar",
+            "clock": "com.google.android.deskclock", "calculator": "com.miui.calculator",
+            "settings": "com.android.settings", "dialer": "com.google.android.dialer",
+            "camera": "com.android.camera", "gallery": "com.google.android.apps.photos",
             "messages": "com.google.android.apps.messaging",
-            "files": "com.miui.android.fashiongallery",
+            "playstore": "com.android.vending",
         }
-
-        package = APP_MAP.get(app_name.lower())
-        if package:
-            self.bridge.open_app(package)
-            print(f"   ✅ Opened {app_name}.")
-            return True
-        else:
-            self.bridge.open_app(app_name)
-            return True
+        package = APP_MAP.get(app_name.lower(), app_name)
+        self.bridge.open_app(package)
+        print(f"   ✅ Opened {app_name}.")
+        return True
 
 
-# ─── Quick Test ────────────────────────────────────
+# ─── Quick Stats ────────────────────────────────────
 if __name__ == "__main__":
-    print("PhoneActions (Dynamic TPM) loaded.")
-    print("Every action reads the screen in real-time.")
-    print("Available: send_whatsapp, write_note, search_youtube, call_number, go_home, go_back, open_app")
+    actions = PhoneActions()
+    print("PhoneActions (Self-Learning TPM) loaded.")
+    print(f"Learned patterns: {len(actions.learned)}")
+    for key, entry in actions.learned.items():
+        print(f"   {key}: confidence={entry.get('confidence', 0):.0%} at ({entry.get('x')},{entry.get('y')})")

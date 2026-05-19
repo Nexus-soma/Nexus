@@ -1,0 +1,18 @@
+# Nexus Dependencies
+# Install with: pip install -r requirements.txt
+
+# Phone control
+# ADB must be installed separately (pacman -S android-tools on Arch)
+
+# Graph database
+networkx>=3.0
+
+# Optional: Vector memory (Phase 3)
+# chromadb>=0.4.0
+
+# Optional: Voice (Phase 5)
+# openai-whisper
+# piper-tts
+
+# Optional: LLM (if not using Ollama)
+# ollama

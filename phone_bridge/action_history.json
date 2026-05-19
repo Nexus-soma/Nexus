@@ -1,0 +1,381 @@
+[
+  {
+    "action": "open_whatsapp",
+    "params": {},
+    "success": false,
+    "timestamp": "2026-05-18T00:10:16.858864",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 0,
+        "after_count": 15,
+        "new_elements": [
+          "Video call",
+          "Back",
+          "Emoji, GIFs and stickers",
+          "Camera",
+          "com.whatsapp:id/input_layout",
+          "More options",
+          "Forward document",
+          "Attach",
+          "com.whatsapp:id/content",
+          "com.whatsapp:id/contact_photo_view"
+        ],
+        "removed_elements": []
+      },
+      "element_appeared": false,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "go_home",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:10:26.611247",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 15,
+        "after_count": 29,
+        "new_elements": [
+          "Off The Road",
+          "Clock",
+          "Weather",
+          "Mi Video",
+          "Open App drawer",
+          "Brave",
+          "Calendar",
+          "COMPUTER STUDIES.",
+          "All PDF Reader",
+          "Lifestyle"
+        ],
+        "removed_elements": [
+          "Video call",
+          "Back",
+          "Emoji, GIFs and stickers",
+          "com.whatsapp:id/input_layout",
+          "More options",
+          "Forward document",
+          "Attach",
+          "com.whatsapp:id/content",
+          "com.whatsapp:id/contact_photo_view",
+          "Message"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "open_whatsapp",
+    "params": {},
+    "success": false,
+    "timestamp": "2026-05-18T00:11:05.951075",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 29,
+        "after_count": 15,
+        "new_elements": [
+          "com.whatsapp:id/contact_photo_view",
+          "Attach",
+          "Video call",
+          "com.whatsapp:id/conversation_contact",
+          "com.whatsapp:id/content",
+          "Message",
+          "Forward document",
+          "Voice call",
+          "com.whatsapp:id/input_layout",
+          "Back"
+        ],
+        "removed_elements": [
+          "Deriv P2P",
+          "Social",
+          "Brave",
+          "Clock",
+          "Folder",
+          "Faida M-Trader",
+          "All PDF Reader",
+          "Compass",
+          "Open App drawer",
+          "COMPUTER STUDIES."
+        ]
+      },
+      "element_appeared": false,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "go_home",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:11:16.019019",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 15,
+        "after_count": 29,
+        "new_elements": [
+          "Deriv P2P",
+          "Social",
+          "Brave",
+          "Clock",
+          "Folder",
+          "Faida M-Trader",
+          "All PDF Reader",
+          "Compass",
+          "Open App drawer",
+          "COMPUTER STUDIES."
+        ],
+        "removed_elements": [
+          "com.whatsapp:id/contact_photo_view",
+          "Attach",
+          "Video call",
+          "com.whatsapp:id/conversation_contact",
+          "com.whatsapp:id/content",
+          "Message",
+          "Forward document",
+          "Voice call",
+          "com.whatsapp:id/input_layout",
+          "Back"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "open_whatsapp",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:11:33.641573",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 29,
+        "after_count": 31,
+        "new_elements": [
+          "Message your assistant",
+          "New chat",
+          "Communities",
+          "Claire picture",
+          "Meta AI picture",
+          "com.whatsapp:id/contact_selector",
+          "Think Twice Kiambu picture",
+          "Mum picture",
+          "You picture",
+          "com.whatsapp:id/contact_row_container"
+        ],
+        "removed_elements": [
+          "Deriv P2P",
+          "Weather",
+          "Clock",
+          "Mi Mover",
+          "Video Players & Editors",
+          "Calendar",
+          "Compass",
+          "Open App drawer",
+          "Off The Road",
+          "WheelWell"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "go_home",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:11:44.637521",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 31,
+        "after_count": 29,
+        "new_elements": [
+          "Deriv P2P",
+          "Weather",
+          "Clock",
+          "Mi Mover",
+          "Video Players & Editors",
+          "Calendar",
+          "Compass",
+          "Open App drawer",
+          "Off The Road",
+          "WheelWell"
+        ],
+        "removed_elements": [
+          "Message your assistant",
+          "New chat",
+          "Communities",
+          "Claire picture",
+          "Meta AI picture",
+          "com.whatsapp:id/contact_selector",
+          "Think Twice Kiambu picture",
+          "Mum picture",
+          "You picture",
+          "com.whatsapp:id/contact_row_container"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "open_whatsapp",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:12:12.905315",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 18,
+        "after_count": 31,
+        "new_elements": [
+          "Kiprono Derrick's status. 1 new update",
+          "Meta AI picture",
+          "com.whatsapp:id/contact_row_container",
+          "Ask Meta AI or Search",
+          "Message your assistant",
+          "Think Twice Kiambu picture",
+          "Claire picture",
+          "com.whatsapp:id/contact_selector",
+          "AK picture",
+          "More options"
+        ],
+        "removed_elements": [
+          "HappyMod",
+          "Notes",
+          "Gallery",
+          "Tools, 1 unread notifications",
+          "Calculator",
+          "Xiaomi Community",
+          "Chrome",
+          "Open App drawer",
+          "Folder",
+          "Finance"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "go_home",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:12:23.246147",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 31,
+        "after_count": 18,
+        "new_elements": [
+          "HappyMod",
+          "Notes",
+          "Gallery",
+          "Tools, 1 unread notifications",
+          "Calculator",
+          "Xiaomi Community",
+          "Chrome",
+          "Open App drawer",
+          "Folder",
+          "Finance"
+        ],
+        "removed_elements": [
+          "Kiprono Derrick's status. 1 new update",
+          "Meta AI picture",
+          "com.whatsapp:id/contact_row_container",
+          "Ask Meta AI or Search",
+          "Message your assistant",
+          "Think Twice Kiambu picture",
+          "Claire picture",
+          "com.whatsapp:id/contact_selector",
+          "AK picture",
+          "More options"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "open_whatsapp",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:12:40.036030",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 41,
+        "after_count": 31,
+        "new_elements": [
+          "Claire picture",
+          "Updates",
+          "Mum picture",
+          "More options",
+          "Kiprono Derrick's status. 1 new update",
+          "Message your assistant",
+          "com.whatsapp:id/contact_row_container",
+          "New chat",
+          "Calls",
+          "Think Twice Kiambu picture"
+        ],
+        "removed_elements": [
+          "equals",
+          "left parenthesis",
+          "plus",
+          "percent",
+          "com.miui.calculator:id/pull_layout",
+          "0",
+          "4",
+          "5",
+          "logarithm",
+          "minus"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  },
+  {
+    "action": "go_home",
+    "params": {},
+    "success": true,
+    "timestamp": "2026-05-18T00:12:49.902245",
+    "details": {
+      "verification": {
+        "changed": true,
+        "before_count": 31,
+        "after_count": 18,
+        "new_elements": [
+          "Weather",
+          "Xiaomi Community",
+          "Folder",
+          "Finance",
+          "Settings",
+          "Calculator",
+          "HappyMod",
+          "Calendar",
+          "Gallery",
+          "Notes"
+        ],
+        "removed_elements": [
+          "Claire picture",
+          "Updates",
+          "Mum picture",
+          "More options",
+          "Kiprono Derrick's status. 1 new update",
+          "Message your assistant",
+          "com.whatsapp:id/contact_row_container",
+          "New chat",
+          "Calls",
+          "Think Twice Kiambu picture"
+        ]
+      },
+      "element_appeared": true,
+      "element_gone": true
+    }
+  }
+]

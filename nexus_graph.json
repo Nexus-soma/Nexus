@@ -1,0 +1,126 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "person",
+      "age": 22,
+      "id": "Kip"
+    },
+    {
+      "type": "person",
+      "id": "Mum"
+    },
+    {
+      "type": "person",
+      "id": "Derick"
+    },
+    {
+      "type": "person",
+      "id": "Ak"
+    },
+    {
+      "id": "Spotify"
+    },
+    {
+      "id": "WhatsApp"
+    },
+    {
+      "id": "Brave"
+    },
+    {
+      "id": "Deriv"
+    },
+    {
+      "id": "Gym"
+    },
+    {
+      "id": "Trading"
+    },
+    {
+      "id": "pref_browser"
+    },
+    {
+      "id": "pref_music"
+    },
+    {
+      "id": "spotify"
+    }
+  ],
+  "edges": [
+    {
+      "relation": "family",
+      "frequency": 1,
+      "source": "Kip",
+      "target": "Mum"
+    },
+    {
+      "relation": "brother",
+      "frequency": 1,
+      "source": "Kip",
+      "target": "Derick"
+    },
+    {
+      "relation": "friend",
+      "source": "Kip",
+      "target": "Ak"
+    },
+    {
+      "relation": "uses",
+      "category": "messaging",
+      "frequency": "daily",
+      "source": "Kip",
+      "target": "WhatsApp"
+    },
+    {
+      "relation": "uses",
+      "category": "browser",
+      "frequency": "daily",
+      "source": "Kip",
+      "target": "Brave"
+    },
+    {
+      "relation": "uses",
+      "category": "trading",
+      "frequency": "weekdays",
+      "source": "Kip",
+      "target": "Deriv"
+    },
+    {
+      "relation": "has_routine",
+      "day": "Tuesday",
+      "time": "18:00",
+      "source": "Kip",
+      "target": "Gym"
+    },
+    {
+      "relation": "has_routine",
+      "day": "Weekdays",
+      "time": "09:00",
+      "source": "Kip",
+      "target": "Trading"
+    },
+    {
+      "relation": "prefers",
+      "key": "browser",
+      "value": "Brave",
+      "source": "Kip",
+      "target": "pref_browser"
+    },
+    {
+      "relation": "prefers",
+      "key": "music",
+      "value": "Spotify",
+      "source": "Kip",
+      "target": "pref_music"
+    },
+    {
+      "relation": "uses",
+      "category": "music",
+      "frequency": "daily",
+      "source": "Kip",
+      "target": "spotify"
+    }
+  ]
+}

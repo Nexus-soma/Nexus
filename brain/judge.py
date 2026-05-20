@@ -93,6 +93,13 @@ class JudgeAgent:
         
         # Check: Screen didn't change at all
         if len(new_elements) == 0 and len(removed_elements) == 0:
+            # BUT: if element count changed, screen DID change (state change)
+            if details["before_count"] != details["after_count"]:
+                return JudgeVerdict(
+                    "pass",
+                    f"Screen state changed ({details['before_count']} → {details['after_count']} elements).",
+                    details
+                )
             return JudgeVerdict(
                 "fail",
                 "Screen did not change. Action may not have executed.",

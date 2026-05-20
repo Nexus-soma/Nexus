@@ -1,11 +1,13 @@
 """
-Nexus Router Agent
-Decides which app and action based on user command + knowledge graph.
-Uses graph for relationship queries: "message my brother" → Derick
+Nexus Router Agent (Phone Map Powered)
+No hardcoded apps. Reads phone_map.json for all available apps.
+Uses knowledge graph for relationship queries.
+Router file stays static — phone_map.json is the dynamic part.
 """
 
 import sys
 import os
+import json
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -20,144 +22,199 @@ class RouterDecision:
         self.confidence = confidence
     
     def to_dict(self) -> dict:
-        return {
-            "app": self.app, "action": self.action,
-            "target": self.target, "confidence": self.confidence
-        }
+        return {"app": self.app, "action": self.action, "target": self.target, "confidence": self.confidence}
     
     def __repr__(self):
         return f"<Router: {self.app} → {self.action} ({self.target}) confidence={self.confidence:.0%}>"
 
 
 class RouterAgent:
-    """Routes commands using keywords + knowledge graph."""
+    """Routes commands using phone map + knowledge graph. File stays static."""
     
-    def __init__(self):
+    def __init__(self, user_name: str = "Kip"):
         self.graph = NexusGraph()
-        
-        self.APP_KEYWORDS = {
-            "whatsapp": ["whatsapp", "wp", "message", "text", "send", "tell", "chat"],
-            "spotify": ["spotify", "music", "song", "play", "playlist", "liked"],
-            "youtube": ["youtube", "video", "watch"],
-            "camera": ["camera", "photo", "picture", "selfie", "capture"],
-            "brave": ["brave", "browser", "search for", "google", "internet", "web"],
-            "notes": ["note", "notes", "write", "create note", "add note"],
-            "deriv": ["deriv", "portfolio", "trade", "invest", "balance"],
-            "settings": ["settings", "wifi", "bluetooth", "battery saver"],
-            "calculator": ["calculator", "calc", "calculate", "math"],
-            "clock": ["clock", "alarm", "timer", "time"],
-            "instagram": ["instagram", "insta", "ig", "reels"],
-            "tiktok": ["tiktok", "tik tok"],
-            "telegram": ["telegram", "tg"],
-        }
-        
-        self.ACTION_KEYWORDS = {
-            "send_message": ["send", "text", "msg", "message", "tell", "say"],
-            "play": ["play", "listen", "start"],
-            "search": ["search", "find", "look for", "google"],
-            "capture": ["take", "capture", "click", "shoot"],
-            "open": ["open", "launch", "start", "go to"],
-            "write": ["write", "create", "add", "new"],
-            "check": ["check", "show", "view", "see", "what is"],
-        }
+        self.phone_map = self._load_phone_map()
+        self.user_name = user_name
+    
+    def _load_phone_map(self):
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
+                           "phone_bridge", "phone_map.json")
+        if os.path.exists(path):
+            with open(path) as f:
+                return json.load(f)
+        return {"apps": {}}
     
     def route(self, user_command: str, screen_context=None) -> RouterDecision:
         text = user_command.lower().strip()
         
-        # Find matching app
-        best_app = None
-        best_app_score = 0
-        for app, keywords in self.APP_KEYWORDS.items():
-            score = sum(1 for kw in keywords if kw in text)
-            if score > best_app_score:
-                best_app_score = score
-                best_app = app
+        app = self._find_app(text)
+        action = self._find_action(text)
         
-        # Find matching action
+        # Default: if searching but no app found, use YouTube
+        if action == "search" and app == "unknown":
+            app = "YouTube"
+        
+        # Default: messaging → WhatsApp
+        if action == "send_message" and app == "unknown":
+            app = "WhatsApp"
+        
+        target = self._extract_target(text, app, action)
+        
+        # Resolve relationships via graph
+        if target:
+            for rel in ["brother", "sister", "mum", "mom", "dad", "friend"]:
+                if target.lower() == f"my {rel}" or target.lower() == rel:
+                    resolved = self.graph.who_is(self.user_name.capitalize(), rel)
+                    if resolved:
+                        target = resolved
+                        break
+        
+        confidence = 0.8 if app != "unknown" else 0.0
+        return RouterDecision(app=app, action=action, target=target, confidence=confidence)
+    
+    def _find_app(self, text: str) -> str:
+        """Find app from aliases + phone map. No hardcoded app list."""
+        text_lower = text.lower()
+        
+        # Aliases for common names that might not match phone map exactly
+        ALIASES = {
+            "calendar": "Calendar", "calender": "Calendar", "schedule": "Calendar",
+            "picture": "Camera", "photo": "Camera", "selfie": "Camera",
+            "note": "Notes", "notes": "Notes",
+            "portfolio": "Deriv", "trade": "Deriv", "invest": "Deriv",
+            "music": "Spotify", "song": "Spotify", "playlist": "Spotify",
+            "video": "YouTube", "videos": "YouTube", "youtube": "YouTube",
+            "whatsapp": "WhatsApp", "wp": "WhatsApp",
+            "browser": "Brave", "internet": "Brave", "chrome": "Brave",
+            "camera": "Camera", "deriv": "Deriv", "spotify": "Spotify",
+            "brave": "Brave", "settings": "Settings", "clock": "Clock",
+            "calculator": "Calculator", "gallery": "Gallery", "photos": "Gallery",
+            "files": "FileManager", "messages": "Messages", "sms": "Messages",
+            "dialer": "Dialer", "phone": "Dialer", "call": "Dialer",
+            "instagram": "Instagram", "insta": "Instagram",
+            "telegram": "Telegram", "tg": "Telegram",
+            "tiktok": "TikTok", "discord": "Discord",
+            "facebook": "Facebook", "fb": "Facebook",
+            "snapchat": "Snapchat", "twitter": "Twitter", "x": "Twitter",
+            "sim toolkit": "STK", "sim": "STK", "stk": "STK",
+            
+        }
+        
+        # Phone map check first (exact app names)
+        for app_name in self.phone_map.get("apps", {}):
+            if app_name.lower() in text_lower:
+                return app_name
+        
+        # Aliases second (common names)
+        for alias, app_name in ALIASES.items():
+            if alias in text_lower:
+                return app_name
+        
+        return "unknown"
+    
+    def _find_action(self, text: str) -> str:
+        """Find action from keywords."""
+        
+        # Explicit "open" commands
+        if text.startswith("open ") or text.startswith("launch ") or text.startswith("start "):
+            return "open"
+        
+        # Action keywords
+        ACTIONS = {
+            "send_message": ["send", "text", "msg", "message", "tell", "say"],
+            "play": ["play", "listen", "hear"],
+            "search": ["search", "find", "look for", "google", "show me", "how to", "videos of"],
+            "capture": ["take", "capture", "click", "shoot", "picture", "photo", "selfie"],
+            "write": ["write", "create", "add", "new", "note"],
+            "check": ["check", "show", "view", "see", "what is", "whats my", "portfolio", "balance"],
+        }
+        
         best_action = "open"
-        best_action_score = 0
-        for action, keywords in self.ACTION_KEYWORDS.items():
+        best_score = 0
+        for action, keywords in ACTIONS.items():
             score = sum(1 for kw in keywords if kw in text)
-            if score > best_action_score:
-                best_action_score = score
+            if score > best_score:
+                best_score = score
                 best_action = action
         
-        # Extract target with GRAPH QUERY
-        target = self._extract_target(text, best_app, best_action)
-        
-        # Confidence
-        confidence = min(best_app_score / 3.0, 1.0) if best_app else 0.0
-        
-        return RouterDecision(
-            app=best_app or "unknown",
-            action=best_action,
-            target=target,
-            confidence=confidence
-        )
+        return best_action
     
     def _extract_target(self, text: str, app: str, action: str) -> str:
-        """Extract target using graph for relationship queries."""
-        words = text.split()
+        """Extract target from command."""
         
-        # TRY GRAPH: "my brother" → query graph → "Derick"
-        relationship_words = ["brother", "sister", "mum", "mom", "dad", "friend", "family"]
-        for i, word in enumerate(words):
-            if word in relationship_words:
-                if i > 0 and words[i-1] == "my":
-                    rel = word
-                    result = self.graph.who_is("Kip", rel)
-                    if result:
-                        return result
-        
-        # TRY GRAPH: "my mum" → query graph → "Mum"
-        if "my" in words:
-            for i, word in enumerate(words):
-                if word == "my" and i+1 < len(words):
-                    potential_rel = words[i+1]
-                    result = self.graph.who_is("Kip", potential_rel)
-                    if result:
-                        return result
-        
-        # Extract from text (original logic)
-        if app == "whatsapp" and action == "send_message":
+        if action == "send_message":
             skip = ["send", "text", "msg", "message", "tell", "a", "to", "on", "in",
-                    "whatsapp", "wp", "saying", "that", "the", "my", "hello", "hi", "hey"]
-            for word in words:
-                if word not in skip and word not in relationship_words:
+                    "whatsapp", "wp", "saying", "that", "the", "my", "hello", "hi", "hey", "it"]
+            for word in text.split():
+                if word not in skip and not word.startswith("what"):
                     return word.capitalize()
         
         if action == "search":
-            for prefix in ["search for ", "find ", "google ", "search youtube for "]:
+            for prefix in ["search for ", "search ", "find ", "look for ", "show me ", "how to ", "videos of "]:
                 if prefix in text:
-                    return text.split(prefix, 1)[1].strip()
+                    rest = text.split(prefix, 1)[1].strip()
+                    # Clean up app names from the target
+                    for app_name in ["youtube", "brave", "chrome", "google"]:
+                        if rest.startswith(app_name):
+                            rest = rest[len(app_name):].strip()
+                            if rest.startswith("for "):
+                                rest = rest[4:].strip()
+                    return rest if rest else None
+            # If app name is in text, extract what comes after it
+            app_lower = app.lower()
+            if app_lower in text:
+                parts = text.split(app_lower, 1)
+                if len(parts) > 1:
+                    rest = parts[1].strip()
+                    for w in ["for ", "about ", "on "]:
+                        if rest.startswith(w):
+                            rest = rest[len(w):]
+                    if rest and rest not in ["a", "an", "the"]:
+                        return rest
         
         if action == "play":
             if "play " in text:
                 rest = text.split("play ", 1)[1]
-                for w in ["on spotify", "on youtube", "my ", "the "]:
+                for w in ["on spotify", "on youtube", "my ", "the ", "a "]:
                     rest = rest.replace(w, "")
-                return rest.strip()
+                return rest.strip() if rest.strip() else None
+        
+        if action == "write":
+            if "called " in text:
+                return text.split("called ", 1)[1].strip()
+            if "write " in text:
+                rest = text.split("write ", 1)[1]
+                for w in ["a ", "an ", "note "]:
+                    if rest.startswith(w):
+                        rest = rest[len(w):]
+                return rest.strip() if rest.strip() else None
         
         return None
 
 
 # ─── Test ──────────────────────────────────────────
 if __name__ == "__main__":
-    print("🎯 Router + Knowledge Graph Test\n")
-    
+    print("🎯 Router (Phone Map Powered)\n")
     router = RouterAgent()
+    print(f"   📱 {len(router.phone_map.get('apps', {}))} apps in phone map\n")
     
     tests = [
-        "message my brother",
-        "tell my mum hello on whatsapp",
-        "message my friend",
-        "play a song",
+        "open calendar",
+        "search how to rebuild cars",
         "search youtube for AI",
-        "open instagram",
+        "open youtube and search for music",
+        "take a picture",
+        "write a note called ideas",
+        "check my portfolio",
+        "play music",
+        "tell mum on whatsapp hello",
+        "send message to my brother",
+        "open camera",
+        "search for cooking videos",
     ]
     
     for cmd in tests:
-        decision = router.route(cmd)
+        d = router.route(cmd)
         print(f"   🧑: {cmd}")
-        print(f"   🎯: {decision}")
+        print(f"   🎯: {d}")
         print()

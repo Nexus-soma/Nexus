@@ -1,13 +1,13 @@
 {
   "device": "Xiaomi 23106RN0DA",
   "resolution": "720x1600",
-  "last_updated": "2026-05-17T14:42:05.939250",
-  "total_apps_mapped": 17,
+  "last_updated": "2026-05-19T21:55:27.686278",
+  "total_apps_mapped": 19,
   "apps": {
     "WhatsApp": {
       "package": "com.whatsapp",
-      "last_explored": "2026-05-17T14:40:55.891964",
-      "total_elements": 33,
+      "last_explored": "2026-05-19T21:54:20.539215",
+      "total_elements": 35,
       "elements": [
         {
           "label": "com.whatsapp:id/pager",
@@ -95,7 +95,7 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
-          "label": "Claire picture",
+          "label": "Meta AI picture",
           "position": {
             "x": 72,
             "y": 392
@@ -146,6 +146,23 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
+          "label": "Think Twice Kiambu picture",
+          "position": {
+            "x": 72,
+            "y": 544
+          },
+          "bounds": {
+            "x1": 20,
+            "y1": 492,
+            "x2": 124,
+            "y2": 596
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.ImageView",
+          "resource_id": "com.whatsapp:id/contact_photo"
+        },
+        {
           "label": "com.whatsapp:id/contact_row_container",
           "position": {
             "x": 360,
@@ -178,6 +195,23 @@
           "checkable": false,
           "class_name": "android.widget.FrameLayout",
           "resource_id": "com.whatsapp:id/contact_selector"
+        },
+        {
+          "label": "Mr and Mrs Langat Family\ud83d\udc96 picture",
+          "position": {
+            "x": 72,
+            "y": 696
+          },
+          "bounds": {
+            "x1": 20,
+            "y1": 644,
+            "x2": 124,
+            "y2": 748
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.ImageView",
+          "resource_id": "com.whatsapp:id/contact_photo"
         },
         {
           "label": "com.whatsapp:id/contact_row_container",
@@ -214,7 +248,7 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
-          "label": "+852 9226 4023 picture",
+          "label": "Lorna Chepchirchir's status. 5 new updates",
           "position": {
             "x": 72,
             "y": 848
@@ -265,7 +299,7 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
-          "label": "Think Twice Kiambu picture",
+          "label": "Ali picture",
           "position": {
             "x": 72,
             "y": 1000
@@ -316,7 +350,7 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
-          "label": "Ali picture",
+          "label": "AA Kenya-Kiambu Branch (Driving Sch Students) picture",
           "position": {
             "x": 72,
             "y": 1152
@@ -367,7 +401,7 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
-          "label": "Lorna Chepchirchir's status. 1 new update",
+          "label": "Corol Maloi picture",
           "position": {
             "x": 72,
             "y": 1304
@@ -418,7 +452,7 @@
           "resource_id": "com.whatsapp:id/contact_selector"
         },
         {
-          "label": "Vennychelaa's status. 1 new update",
+          "label": "camilla picture",
           "position": {
             "x": 72,
             "y": 1405
@@ -471,11 +505,11 @@
         {
           "label": "Message your assistant",
           "position": {
-            "x": 632,
+            "x": 630,
             "y": 1183
           },
           "bounds": {
-            "x1": 592,
+            "x1": 588,
             "y1": 1143,
             "x2": 672,
             "y2": 1223
@@ -503,7 +537,7 @@
           "resource_id": "com.whatsapp:id/fab"
         },
         {
-          "label": "Chats, 36 new notifications",
+          "label": "Chats, 41 new notifications",
           "position": {
             "x": 90,
             "y": 1488
@@ -853,8 +887,8 @@
     },
     "YouTube": {
       "package": "app.revanced.android.youtube",
-      "last_explored": "2026-05-17T14:41:12.255900",
-      "total_elements": 22,
+      "last_explored": "2026-05-19T21:54:27.747955",
+      "total_elements": 23,
       "elements": [
         {
           "label": "app.revanced.android.youtube:id/watch_while_layout_coordinator_layout",
@@ -955,7 +989,7 @@
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.ImageView",
+          "class_name": "android.widget.Button",
           "resource_id": ""
         },
         {
@@ -976,7 +1010,7 @@
           "resource_id": ""
         },
         {
-          "label": "Ford bring back the Model T!!! lol #Car #Cars #Ford \u2013 play Short",
+          "label": "This Fisker Pear may be the best EV bargain! \ud83e\udee8\ud83e\udee8\ud83e\udee8 \u2013 play Short",
           "position": {
             "x": 188,
             "y": 515
@@ -1006,7 +1040,7 @@
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.ImageView",
+          "class_name": "android.widget.Button",
           "resource_id": ""
         },
         {
@@ -1027,7 +1061,7 @@
           "resource_id": ""
         },
         {
-          "label": "What is a cyberdeck? \u2013 play Short",
+          "label": "Do you remember when Samsung tried to make a phone that had no front camera at all #shorts #samsung \u2013 play Short",
           "position": {
             "x": 532,
             "y": 515
@@ -1057,20 +1091,20 @@
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.ImageView",
+          "class_name": "android.widget.Button",
           "resource_id": ""
         },
         {
           "label": "android.view.ViewGroup",
           "position": {
             "x": 360,
-            "y": 1134
+            "y": 1150
           },
           "bounds": {
             "x1": 0,
             "y1": 824,
             "x2": 720,
-            "y2": 1445
+            "y2": 1477
           },
           "clickable": false,
           "checkable": false,
@@ -1078,16 +1112,16 @@
           "resource_id": ""
         },
         {
-          "label": "Tekken 250cc: The Truth Kenyan Dealers Won't Tell You (Full Breakdown) \u2013 23 minutes, 50 seconds \u2013 Go to channel GTalio \u2013 GTalio - 10 thousand views - 5 days ago \u2013 play video",
+          "label": "We Tried To Crash Into A Self Driving Tesla \u2013 25 minutes, 58 seconds \u2013  \u2013 Dirty Tesla and Out of Spec Reviews - 1.2 million views - 5 months ago \u2013 play video",
           "position": {
             "x": 360,
-            "y": 1098
+            "y": 1114
           },
           "bounds": {
             "x1": 0,
             "y1": 824,
             "x2": 720,
-            "y2": 1373
+            "y2": 1405
           },
           "clickable": true,
           "checkable": false,
@@ -1095,24 +1129,24 @@
           "resource_id": ""
         },
         {
-          "label": "Go to channel GTalio",
+          "label": "Collaboration channels",
           "position": {
-            "x": 60,
-            "y": 1289
+            "x": 56,
+            "y": 1285
           },
           "bounds": {
             "x1": 24,
             "y1": 1253,
-            "x2": 96,
-            "y2": 1325
+            "x2": 88,
+            "y2": 1317
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.ImageView",
+          "class_name": "android.view.ViewGroup",
           "resource_id": ""
         },
         {
-          "label": "Action menu for Tekken 250cc: The Truth Kenyan Dealers Won't Tell You (Full Breakdown)",
+          "label": "Action menu for We Tried To Crash Into A Self Driving Tesla",
           "position": {
             "x": 664,
             "y": 1277
@@ -1125,22 +1159,39 @@
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.ImageView",
+          "class_name": "android.widget.Button",
           "resource_id": ""
         },
         {
           "label": "android.view.ViewGroup",
           "position": {
             "x": 360,
-            "y": 1522
+            "y": 1538
           },
           "bounds": {
             "x1": 0,
-            "y1": 1477,
+            "y1": 1509,
             "x2": 720,
             "y2": 1568
           },
           "clickable": false,
+          "checkable": false,
+          "class_name": "android.view.ViewGroup",
+          "resource_id": ""
+        },
+        {
+          "label": "AI agent buys itself a robot, does exactly what experts warned \u2013 16 minutes, 24 seconds \u2013 Go to channel InsideAI \u2013 InsideAI - 3.5 million views - 1 month ago \u2013 play video",
+          "position": {
+            "x": 360,
+            "y": 1538
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1509,
+            "x2": 720,
+            "y2": 1568
+          },
+          "clickable": true,
           "checkable": false,
           "class_name": "android.view.ViewGroup",
           "resource_id": ""
@@ -1479,7 +1530,7 @@
     },
     "Calendar": {
       "package": "com.google.android.calendar",
-      "last_explored": "2026-05-17T14:41:52.268956",
+      "last_explored": "2026-05-19T21:54:33.827500",
       "total_elements": 49,
       "elements": [
         {
@@ -1925,7 +1976,7 @@
           "resource_id": ""
         },
         {
-          "label": "Sunday 17 May: 2 items",
+          "label": "Sunday 17 May: 1 item",
           "position": {
             "x": 664,
             "y": 795
@@ -1959,7 +2010,7 @@
           "resource_id": ""
         },
         {
-          "label": "Tuesday 19 May: 0 items",
+          "label": "Tuesday 19 May: 1 item",
           "position": {
             "x": 157,
             "y": 1017
@@ -2319,8 +2370,8 @@
     },
     "Notes": {
       "package": "com.miui.notes",
-      "last_explored": "2026-05-17T14:41:45.224186",
-      "total_elements": 17,
+      "last_explored": "2026-05-19T21:54:39.964447",
+      "total_elements": 18,
       "elements": [
         {
           "label": "com.miui.notes:id/vp_fragments",
@@ -2340,14 +2391,31 @@
           "resource_id": "com.miui.notes:id/vp_fragments"
         },
         {
-          "label": "com.miui.notes:id/recycler_view",
+          "label": "com.miui.notes:id/search_bar",
           "position": {
             "x": 360,
-            "y": 935
+            "y": 271
           },
           "bounds": {
             "x1": 0,
             "y1": 271,
+            "x2": 720,
+            "y2": 272
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.FrameLayout",
+          "resource_id": "com.miui.notes:id/search_bar"
+        },
+        {
+          "label": "com.miui.notes:id/recycler_view",
+          "position": {
+            "x": 360,
+            "y": 936
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 272,
             "x2": 720,
             "y2": 1600
           },
@@ -2357,126 +2425,143 @@
           "resource_id": "com.miui.notes:id/recycler_view"
         },
         {
-          "label": "com.miui.notes:id/note_group",
+          "label": "com.miui.notes:id/sl_item_group",
           "position": {
             "x": 360,
-            "y": 369
+            "y": 359
           },
           "bounds": {
-            "x1": 22,
-            "y1": 278,
-            "x2": 698,
-            "y2": 461
+            "x1": 0,
+            "y1": 279,
+            "x2": 720,
+            "y2": 440
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
+          "class_name": "android.widget.FrameLayout",
+          "resource_id": "com.miui.notes:id/sl_item_group"
         },
         {
-          "label": "com.miui.notes:id/note_group",
+          "label": "Not completed",
           "position": {
-            "x": 360,
-            "y": 574
+            "x": 71,
+            "y": 348
           },
           "bounds": {
             "x1": 22,
-            "y1": 483,
-            "x2": 698,
-            "y2": 666
+            "y1": 279,
+            "x2": 121,
+            "y2": 418
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
+          "class_name": "android.view.View",
+          "resource_id": "com.miui.notes:id/checkbox_mask"
         },
         {
-          "label": "com.miui.notes:id/note_group",
+          "label": "android:id/checkbox",
+          "position": {
+            "x": 75,
+            "y": 349
+          },
+          "bounds": {
+            "x1": 59,
+            "y1": 332,
+            "x2": 92,
+            "y2": 366
+          },
+          "clickable": false,
+          "checkable": true,
+          "class_name": "android.widget.CheckBox",
+          "resource_id": "android:id/checkbox"
+        },
+        {
+          "label": "VB BV CV BB  ",
+          "position": {
+            "x": 391,
+            "y": 349
+          },
+          "bounds": {
+            "x1": 121,
+            "y1": 329,
+            "x2": 661,
+            "y2": 369
+          },
+          "clickable": false,
+          "checkable": false,
+          "class_name": "android.widget.TextView",
+          "resource_id": "com.miui.notes:id/content"
+        },
+        {
+          "label": "com.miui.notes:id/sl_item_group",
           "position": {
             "x": 360,
-            "y": 779
+            "y": 520
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 440,
+            "x2": 720,
+            "y2": 601
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.FrameLayout",
+          "resource_id": "com.miui.notes:id/sl_item_group"
+        },
+        {
+          "label": "Not completed",
+          "position": {
+            "x": 71,
+            "y": 509
           },
           "bounds": {
             "x1": 22,
-            "y1": 688,
-            "x2": 698,
-            "y2": 871
+            "y1": 440,
+            "x2": 121,
+            "y2": 579
           },
           "clickable": true,
           "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
+          "class_name": "android.view.View",
+          "resource_id": "com.miui.notes:id/checkbox_mask"
         },
         {
-          "label": "com.miui.notes:id/note_group",
+          "label": "android:id/checkbox",
           "position": {
-            "x": 360,
-            "y": 984
+            "x": 75,
+            "y": 510
           },
           "bounds": {
-            "x1": 22,
-            "y1": 893,
-            "x2": 698,
-            "y2": 1076
+            "x1": 59,
+            "y1": 493,
+            "x2": 92,
+            "y2": 527
           },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
+          "clickable": false,
+          "checkable": true,
+          "class_name": "android.widget.CheckBox",
+          "resource_id": "android:id/checkbox"
         },
         {
-          "label": "com.miui.notes:id/note_group",
+          "label": "ist",
           "position": {
-            "x": 360,
-            "y": 1189
+            "x": 391,
+            "y": 510
           },
           "bounds": {
-            "x1": 22,
-            "y1": 1098,
-            "x2": 698,
-            "y2": 1281
+            "x1": 121,
+            "y1": 490,
+            "x2": 661,
+            "y2": 530
           },
-          "clickable": true,
+          "clickable": false,
           "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
+          "class_name": "android.widget.TextView",
+          "resource_id": "com.miui.notes:id/content"
         },
         {
-          "label": "com.miui.notes:id/note_group",
-          "position": {
-            "x": 360,
-            "y": 1394
-          },
-          "bounds": {
-            "x1": 22,
-            "y1": 1303,
-            "x2": 698,
-            "y2": 1486
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
-        },
-        {
-          "label": "com.miui.notes:id/note_group",
-          "position": {
-            "x": 360,
-            "y": 1554
-          },
-          "bounds": {
-            "x1": 22,
-            "y1": 1508,
-            "x2": 698,
-            "y2": 1600
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.widget.LinearLayout",
-          "resource_id": "com.miui.notes:id/note_group"
-        },
-        {
-          "label": "Tap to create a note",
+          "label": "Tap to create a task",
           "position": {
             "x": 603,
             "y": 1334
@@ -2490,7 +2575,7 @@
           "clickable": true,
           "checkable": false,
           "class_name": "android.widget.ImageView",
-          "resource_id": "com.miui.notes:id/note_add"
+          "resource_id": "com.miui.notes:id/content_add"
         },
         {
           "label": "com.miui.notes:id/action_bar_container",
@@ -2510,23 +2595,6 @@
           "resource_id": "com.miui.notes:id/action_bar_container"
         },
         {
-          "label": "com.miui.notes:id/action_folder",
-          "position": {
-            "x": 536,
-            "y": 119
-          },
-          "bounds": {
-            "x1": 492,
-            "y1": 75,
-            "x2": 580,
-            "y2": 163
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.widget.FrameLayout",
-          "resource_id": "com.miui.notes:id/action_folder"
-        },
-        {
           "label": "com.miui.notes:id/action_setting",
           "position": {
             "x": 639,
@@ -2544,15 +2612,15 @@
           "resource_id": "com.miui.notes:id/action_setting"
         },
         {
-          "label": "Notes",
+          "label": "Tasks",
           "position": {
-            "x": 111,
+            "x": 110,
             "y": 215
           },
           "bounds": {
             "x1": 47,
             "y1": 178,
-            "x2": 176,
+            "x2": 173,
             "y2": 253
           },
           "clickable": false,
@@ -2589,7 +2657,7 @@
             "x2": 350,
             "y2": 1568
           },
-          "clickable": false,
+          "clickable": true,
           "checkable": false,
           "class_name": "android.widget.LinearLayout",
           "resource_id": "com.miui.notes:id/action_page_1"
@@ -2606,7 +2674,7 @@
             "x2": 705,
             "y2": 1568
           },
-          "clickable": true,
+          "clickable": false,
           "checkable": false,
           "class_name": "android.widget.LinearLayout",
           "resource_id": "com.miui.notes:id/action_page_2"
@@ -3496,8 +3564,8 @@
     },
     "Spotify": {
       "package": "com.spotify.music",
-      "last_explored": "2026-05-17T14:41:29.890386",
-      "total_elements": 28,
+      "last_explored": "2026-05-19T21:54:46.320041",
+      "total_elements": 30,
       "elements": [
         {
           "label": "android.view.View",
@@ -3602,50 +3670,16 @@
           "resource_id": "com.spotify.music:id/card_root"
         },
         {
-          "label": "android.view.View",
-          "position": {
-            "x": 360,
-            "y": 620
-          },
-          "bounds": {
-            "x1": 32,
-            "y1": 385,
-            "x2": 688,
-            "y2": 855
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.view.View",
-          "resource_id": ""
-        },
-        {
-          "label": "More options, The Party of your Year(s)",
-          "position": {
-            "x": 632,
-            "y": 433
-          },
-          "bounds": {
-            "x1": 584,
-            "y1": 385,
-            "x2": 680,
-            "y2": 481
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.widget.Button",
-          "resource_id": ""
-        },
-        {
           "label": "com.spotify.music:id/carousel",
           "position": {
             "x": 360,
-            "y": 1185
+            "y": 607
           },
           "bounds": {
             "x1": 0,
-            "y1": 993,
+            "y1": 415,
             "x2": 720,
-            "y2": 1377
+            "y2": 799
           },
           "clickable": false,
           "checkable": false,
@@ -3653,16 +3687,16 @@
           "resource_id": "com.spotify.music:id/carousel"
         },
         {
-          "label": "Joel Lwaga Radio. Joel Lwaga, Barnaba, Wapendwa Muziki, Rehema Simfukwe, Adawnage",
+          "label": "Joel Lwaga Radio. Joel Lwaga, Barnaba, Wapendwa Muziki, Adawnage, Mathias Walichupa",
           "position": {
             "x": 176,
-            "y": 1185
+            "y": 607
           },
           "bounds": {
             "x1": 32,
-            "y1": 993,
+            "y1": 415,
             "x2": 320,
-            "y2": 1377
+            "y2": 799
           },
           "clickable": true,
           "checkable": false,
@@ -3673,13 +3707,13 @@
           "label": "Kizz Daniel Radio. Young Jonn, Kizz Daniel, Lojay, Fido, SPINALL",
           "position": {
             "x": 496,
-            "y": 1185
+            "y": 607
           },
           "bounds": {
             "x1": 352,
-            "y1": 993,
+            "y1": 415,
             "x2": 640,
-            "y2": 1377
+            "y2": 799
           },
           "clickable": true,
           "checkable": false,
@@ -3687,16 +3721,16 @@
           "resource_id": "com.spotify.music:id/card_root"
         },
         {
-          "label": "Ne-Yo Radio. Rihanna, Calvin Harris, Ne-Yo, Flo Rida, Mariah Carey",
+          "label": "Ne-Yo Radio. Rihanna, 50 Cent, Ne-Yo, Mariah Carey, Sean Kingston",
           "position": {
             "x": 696,
-            "y": 1185
+            "y": 607
           },
           "bounds": {
             "x1": 672,
-            "y1": 993,
+            "y1": 415,
             "x2": 720,
-            "y2": 1377
+            "y2": 799
           },
           "clickable": true,
           "checkable": false,
@@ -3707,13 +3741,13 @@
           "label": "com.spotify.music:id/carousel",
           "position": {
             "x": 360,
-            "y": 1557
+            "y": 1129
           },
           "bounds": {
             "x1": 0,
-            "y1": 1515,
+            "y1": 937,
             "x2": 720,
-            "y2": 1600
+            "y2": 1321
           },
           "clickable": false,
           "checkable": false,
@@ -3724,11 +3758,79 @@
           "label": "Nyashinski Radio. Diplo, Nyashinski, Yemi Alade, Savara, Chris Kaiga",
           "position": {
             "x": 176,
-            "y": 1557
+            "y": 1129
           },
           "bounds": {
             "x1": 32,
-            "y1": 1515,
+            "y1": 937,
+            "x2": 320,
+            "y2": 1321
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.ViewGroup",
+          "resource_id": "com.spotify.music:id/card_root"
+        },
+        {
+          "label": "Bien Radio. Bien, Bridget Blue, Njerae, Elijah Kitaka, Matata",
+          "position": {
+            "x": 496,
+            "y": 1129
+          },
+          "bounds": {
+            "x1": 352,
+            "y1": 937,
+            "x2": 640,
+            "y2": 1321
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.ViewGroup",
+          "resource_id": "com.spotify.music:id/card_root"
+        },
+        {
+          "label": "Toxic Lyrikali Radio. Toxic Lyrikali, Countree Hype, Dyana Cods, Mauru Gwash, Thirtyfourbrick",
+          "position": {
+            "x": 696,
+            "y": 1129
+          },
+          "bounds": {
+            "x1": 672,
+            "y1": 937,
+            "x2": 720,
+            "y2": 1321
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.ViewGroup",
+          "resource_id": "com.spotify.music:id/card_root"
+        },
+        {
+          "label": "com.spotify.music:id/carousel",
+          "position": {
+            "x": 360,
+            "y": 1558
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1517,
+            "x2": 720,
+            "y2": 1600
+          },
+          "clickable": false,
+          "checkable": false,
+          "class_name": "androidx.recyclerview.widget.RecyclerView",
+          "resource_id": "com.spotify.music:id/carousel"
+        },
+        {
+          "label": "com.spotify.music:id/card_root",
+          "position": {
+            "x": 176,
+            "y": 1558
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1517,
             "x2": 320,
             "y2": 1600
           },
@@ -3738,14 +3840,14 @@
           "resource_id": "com.spotify.music:id/card_root"
         },
         {
-          "label": "Toxic Lyrikali Radio. Toxic Lyrikali, Dyana Cods, EBOLA MKUU, Mauru Gwash, Thirtyfourbrick",
+          "label": "com.spotify.music:id/card_root",
           "position": {
             "x": 496,
-            "y": 1557
+            "y": 1558
           },
           "bounds": {
             "x1": 352,
-            "y1": 1515,
+            "y1": 1517,
             "x2": 640,
             "y2": 1600
           },
@@ -3755,14 +3857,14 @@
           "resource_id": "com.spotify.music:id/card_root"
         },
         {
-          "label": "Bien Radio. Bien, Sauti Sol, Bensoul, Bridget Blue, Matata",
+          "label": "com.spotify.music:id/card_root",
           "position": {
             "x": 696,
-            "y": 1557
+            "y": 1558
           },
           "bounds": {
             "x1": 672,
-            "y1": 1515,
+            "y1": 1517,
             "x2": 720,
             "y2": 1600
           },
@@ -4935,7 +5037,7 @@
     },
     "Telegram": {
       "package": "org.telegram.messenger",
-      "last_explored": "2026-05-17T14:41:03.029285",
+      "last_explored": "2026-05-19T21:54:52.328856",
       "total_elements": 25,
       "elements": [
         {
@@ -5367,8 +5469,8 @@
     },
     "YouTube Music": {
       "package": "app.revanced.android.apps.youtube.music",
-      "last_explored": "2026-05-17T14:41:21.470518",
-      "total_elements": 50,
+      "last_explored": "2026-05-19T21:54:58.994283",
+      "total_elements": 51,
       "elements": [
         {
           "label": "app.revanced.android.apps.youtube.music:id/coordinator_layout",
@@ -5575,7 +5677,7 @@
           "resource_id": ""
         },
         {
-          "label": "Liked music",
+          "label": "We Ride",
           "position": {
             "x": 141,
             "y": 579
@@ -5609,7 +5711,7 @@
           "resource_id": ""
         },
         {
-          "label": "Drake - Signs",
+          "label": "Liked music",
           "position": {
             "x": 360,
             "y": 579
@@ -5643,7 +5745,7 @@
           "resource_id": ""
         },
         {
-          "label": "Sold Out Dates",
+          "label": "DA WIZARD",
           "position": {
             "x": 578,
             "y": 579
@@ -5670,6 +5772,40 @@
             "y1": 633,
             "x2": 679,
             "y2": 680
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.ViewGroup",
+          "resource_id": ""
+        },
+        {
+          "label": "The Alan Parsons Symphonic Project \"Sirius\" - \"Eye In The Sky\" (Live in Colombia)",
+          "position": {
+            "x": 141,
+            "y": 797
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 688,
+            "x2": 250,
+            "y2": 906
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.ViewGroup",
+          "resource_id": ""
+        },
+        {
+          "label": "android.view.ViewGroup",
+          "position": {
+            "x": 137,
+            "y": 874
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 851,
+            "x2": 242,
+            "y2": 898
           },
           "clickable": true,
           "checkable": false,
@@ -5679,40 +5815,6 @@
         {
           "label": "Don\u2019t Matter To Me (feat. Michael Jackson)",
           "position": {
-            "x": 141,
-            "y": 797
-          },
-          "bounds": {
-            "x1": 32,
-            "y1": 688,
-            "x2": 250,
-            "y2": 906
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.view.ViewGroup",
-          "resource_id": ""
-        },
-        {
-          "label": "android.view.ViewGroup",
-          "position": {
-            "x": 137,
-            "y": 874
-          },
-          "bounds": {
-            "x1": 32,
-            "y1": 851,
-            "x2": 242,
-            "y2": 898
-          },
-          "clickable": true,
-          "checkable": false,
-          "class_name": "android.view.ViewGroup",
-          "resource_id": ""
-        },
-        {
-          "label": "Lost in the Fire (Official Video)",
-          "position": {
             "x": 360,
             "y": 797
           },
@@ -5745,7 +5847,7 @@
           "resource_id": ""
         },
         {
-          "label": "Sold Out Dates (feat. Lil Baby)",
+          "label": "Overdue (feat. Travis Scott)",
           "position": {
             "x": 578,
             "y": 797
@@ -5779,7 +5881,7 @@
           "resource_id": ""
         },
         {
-          "label": "Stay Schemin (feat. Drake)",
+          "label": "Gunna - Sold Out Dates ft. Lil Baby INSTRUMENTAL REMAKE (NO LOOPS) (99% ACCURATE)",
           "position": {
             "x": 141,
             "y": 1015
@@ -5813,7 +5915,7 @@
           "resource_id": ""
         },
         {
-          "label": "E85",
+          "label": "Sold Out Dates",
           "position": {
             "x": 360,
             "y": 1015
@@ -6068,6 +6170,23 @@
           "resource_id": "app.revanced.android.apps.youtube.music:id/player_page"
         },
         {
+          "label": "0 minutes 0 seconds of 4 minutes 5 seconds",
+          "position": {
+            "x": 360,
+            "y": 1404
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1336,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": false,
+          "checkable": false,
+          "class_name": "android.widget.SeekBar",
+          "resource_id": ""
+        },
+        {
           "label": "app.revanced.android.apps.youtube.music:id/mini_player",
           "position": {
             "x": 360,
@@ -6224,24 +6343,1860 @@
     },
     "Brave": {
       "package": "com.brave.browser",
-      "last_explored": "2026-05-17T14:41:37.731094",
-      "total_elements": 12,
+      "last_explored": "2026-05-19T21:55:07.330072",
+      "total_elements": 120,
       "elements": [
         {
-          "label": "Web View",
+          "label": "undo is z but what is redo - Brave Search",
           "position": {
             "x": 360,
-            "y": 818
+            "y": 826
           },
           "bounds": {
             "x1": 0,
-            "y1": 68,
+            "y1": 180,
             "x2": 720,
-            "y2": 1568
+            "y2": 1472
           },
           "clickable": false,
           "checkable": false,
-          "class_name": "android.widget.FrameLayout",
+          "class_name": "android.webkit.WebView",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave logo",
+          "position": {
+            "x": 80,
+            "y": 264
+          },
+          "bounds": {
+            "x1": 48,
+            "y1": 232,
+            "x2": 112,
+            "y2": 296
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "undo is z but what is redo",
+          "position": {
+            "x": 231,
+            "y": 264
+          },
+          "bounds": {
+            "x1": 136,
+            "y1": 212,
+            "x2": 326,
+            "y2": 316
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.EditText",
+          "resource_id": "searchbox"
+        },
+        {
+          "label": "Clear",
+          "position": {
+            "x": 362,
+            "y": 264
+          },
+          "bounds": {
+            "x1": 326,
+            "y1": 228,
+            "x2": 398,
+            "y2": 300
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": "clear-query-button"
+        },
+        {
+          "label": "Search",
+          "position": {
+            "x": 452,
+            "y": 264
+          },
+          "bounds": {
+            "x1": 416,
+            "y1": 228,
+            "x2": 488,
+            "y2": 300
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": "submit-button"
+        },
+        {
+          "label": "Ask",
+          "position": {
+            "x": 540,
+            "y": 264
+          },
+          "bounds": {
+            "x1": 504,
+            "y1": 228,
+            "x2": 576,
+            "y2": 300
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": "submit-llm-button"
+        },
+        {
+          "label": "More",
+          "position": {
+            "x": 656,
+            "y": 264
+          },
+          "bounds": {
+            "x1": 618,
+            "y1": 226,
+            "x2": 694,
+            "y2": 302
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "primary-tabs",
+          "position": {
+            "x": 294,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 4,
+            "y1": 334,
+            "x2": 584,
+            "y2": 426
+          },
+          "clickable": false,
+          "checkable": false,
+          "class_name": "android.widget.ListView",
+          "resource_id": "primary-tabs"
+        },
+        {
+          "label": "Ask",
+          "position": {
+            "x": 64,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 14,
+            "y1": 344,
+            "x2": 114,
+            "y2": 416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "All",
+          "position": {
+            "x": 163,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 120,
+            "y1": 344,
+            "x2": 206,
+            "y2": 416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Images",
+          "position": {
+            "x": 286,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 212,
+            "y1": 344,
+            "x2": 360,
+            "y2": 416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "News",
+          "position": {
+            "x": 429,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 366,
+            "y1": 344,
+            "x2": 492,
+            "y2": 416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Videos",
+          "position": {
+            "x": 570,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 498,
+            "y1": 344,
+            "x2": 642,
+            "y2": 416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Goggles",
+          "position": {
+            "x": 684,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 648,
+            "y1": 344,
+            "x2": 720,
+            "y2": 416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Filters",
+          "position": {
+            "x": 654,
+            "y": 380
+          },
+          "bounds": {
+            "x1": 616,
+            "y1": 342,
+            "x2": 692,
+            "y2": 418
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 579,
+            "y": 538
+          },
+          "bounds": {
+            "x1": 558,
+            "y1": 518,
+            "x2": 600,
+            "y2": 558
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 505,
+            "y": 626
+          },
+          "bounds": {
+            "x1": 484,
+            "y1": 606,
+            "x2": 526,
+            "y2": 646
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 579,
+            "y": 870
+          },
+          "bounds": {
+            "x1": 558,
+            "y1": 850,
+            "x2": 600,
+            "y2": 890
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 225,
+            "y": 966
+          },
+          "bounds": {
+            "x1": 204,
+            "y1": 946,
+            "x2": 246,
+            "y2": 986
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 281,
+            "y": 1106
+          },
+          "bounds": {
+            "x1": 260,
+            "y1": 1086,
+            "x2": 302,
+            "y2": 1126
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 241,
+            "y": 1194
+          },
+          "bounds": {
+            "x1": 220,
+            "y1": 1174,
+            "x2": 262,
+            "y2": 1214
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "Elaborate",
+          "position": {
+            "x": 109,
+            "y": 1372
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1338,
+            "x2": 210,
+            "y2": 1406
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "Why do Windows and Mac use different redo shortcuts?",
+          "position": {
+            "x": 348,
+            "y": 1447
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1422,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Can I customize the redo keyboard shortcut?",
+          "position": {
+            "x": 314,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1472,
+            "x2": 620,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Does redo work across different applications?",
+          "position": {
+            "x": 320,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1472,
+            "x2": 632,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Copy",
+          "position": {
+            "x": 50,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 16,
+            "y1": 1472,
+            "x2": 84,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "Share",
+          "position": {
+            "x": 118,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 84,
+            "y1": 1472,
+            "x2": 152,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "Good response",
+          "position": {
+            "x": 186,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 152,
+            "y1": 1472,
+            "x2": 220,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "Bad response",
+          "position": {
+            "x": 254,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 220,
+            "y1": 1472,
+            "x2": 288,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "View all",
+          "position": {
+            "x": 621,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 530,
+            "y1": 1472,
+            "x2": 712,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.EditText",
+          "position": {
+            "x": 310,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 10,
+            "y1": 1472,
+            "x2": 610,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.EditText",
+          "resource_id": ""
+        },
+        {
+          "label": "android.widget.Button",
+          "position": {
+            "x": 652,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 618,
+            "y1": 1472,
+            "x2": 686,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Microsoft Support support.microsoft.com \u203a en-us \u203a office \u203a undo-or-redo-typing-or-design-changes-6b4ab13a-32a7-427f-8dbc-a076ae2e6132 Undo or redo typing or design changes | Microsoft Support",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Progress progress.com \u203a documentation \u203a sitefinity-cms \u203a undo-redo-and-other-shortcut-key-functions Undo, redo, and other shortcut key functions - Sitefinity CMS Content management",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 youtube.com How to Undo and Redo in Microsoft Word (Ctrl+Z & Ctrl+Y Explained) ... 16 February 2026",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1472,
+            "x2": 712,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 youtube.com Undo and Redo Like a Pro: Essential Keyboard Shortcuts - YouTube 26 July 2023",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1472,
+            "x2": 712,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "02:37 \ud83c\udf10 YouTube Undo & Redo Shortcut Keys 13 January 2017 34.9k",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1472,
+            "x2": 712,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "View all",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": "video-cluster-show-more"
+        },
+        {
+          "label": "Undo",
+          "position": {
+            "x": 84,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 34,
+            "y1": 1472,
+            "x2": 134,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Wikipedia",
+          "position": {
+            "x": 510,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 444,
+            "y1": 1472,
+            "x2": 576,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Wikipedia",
+          "position": {
+            "x": 124,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 26,
+            "y1": 1472,
+            "x2": 222,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Wikidata",
+          "position": {
+            "x": 328,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 236,
+            "y1": 1472,
+            "x2": 420,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Openalex",
+          "position": {
+            "x": 531,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 434,
+            "y1": 1472,
+            "x2": 628,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Wikipedia",
+          "position": {
+            "x": 192,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 140,
+            "y1": 1472,
+            "x2": 244,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Feedback",
+          "position": {
+            "x": 664,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 640,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Wikipedia en.wikipedia.org \u203a wiki \u203a Undo Undo - Wikipedia",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "android.view.View",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": false,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "History",
+          "position": {
+            "x": 75,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 8,
+            "y1": 1472,
+            "x2": 142,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Undo and redo models",
+          "position": {
+            "x": 311,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 156,
+            "y1": 1472,
+            "x2": 466,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Undo implementation",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 480,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 University of Colorado cu.edu \u203a blog \u203a tech-tips \u203a undoredo-keyboard-shortcut Undo/Redo keyboard shortcut | University of Colorado",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Reddit reddit.com \u203a r/remarkabletablet \u203a ctrl+shift+z doesn't redo. instead it types a capital z which wipes out redo history! r/RemarkableTablet on Reddit: Ctrl+Shift+Z doesn't redo. Instead it types a capital Z which wipes out redo history!",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Microsoft Support support.microsoft.com \u203a en-us \u203a office \u203a undo-redo-or-repeat-an-action-84bdb9bc-4e23-4f06-ba78-f7b893eb2d28 Undo, redo, or repeat an action - Microsoft Support",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Google",
+          "position": {
+            "x": 138,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 244,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": "search-external-google"
+        },
+        {
+          "label": "Bing",
+          "position": {
+            "x": 366,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 260,
+            "y1": 1472,
+            "x2": 472,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": "search-external-bing"
+        },
+        {
+          "label": "Mojeek",
+          "position": {
+            "x": 138,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 244,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": "search-external-mojeek"
+        },
+        {
+          "label": "\ud83c\udf10 Lenovo lenovo.com \u203a home What is the difference between Ctrl Y and Ctrl Shift Z? | Lenovo US",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Adobe helpx.adobe.com \u203a photoshop user guide \u203a get started \u203a use undo and redo commands Use Undo and Redo commands in Photoshop",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Medium medium.com \u203a @sandeepkella23 \u203a how-does-undo-work-understanding-the-mechanics-behind-ctrl-z-0369907a41d2 How Does Undo Work? Understanding the Mechanics Behind Ctrl + Z | by Sandeep Kella | Medium",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "how-does-undo-work-understanding-the-mechanics-behind-ctrl-z-0369907a41d2",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Apple Support support.apple.com \u203a guide \u203a pages \u203a undo-or-redo-changes-tana7e101d4c \u203a mac Undo or redo changes in Pages on Mac - Apple Support",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Thunkable community.thunkable.com \u203a questions about thunkable x Ctrl + z = undo, what is redo? - Questions about Thunkable X - Community",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "75477",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Reddit reddit.com \u203a r/programmerhumor \u203a who thought that would be a good idea? r/ProgrammerHumor on Reddit: Who thought that would be a good idea?",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "who_thought_that_would_be_a_good_idea",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Reddit reddit.com \u203a r/fl_studio \u203a why on earth alternate undo is optional in? why is it alternate? and why is the new \"undo\" mindset undo/ redo on one key? r/FL_Studio on Reddit: Why on earth alternate UNDO is optional IN? Why is it alternate? And why is the new \"Undo\" Mindset undo/ redo on one KEY?",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Top answer 1 of 6 9 It might seem stupid, but once you get used to it it's very useful, it's so you can toggle quickly because undoing and redoing and decide if something is really a mistaking by essentially allowing you to a b it for a second, and it's so easy to hit alt. Edit: my autocorrect is insane lol, I'm leaving the mistakes because they're so egregious.",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 JetBrains intellij-support.jetbrains.com \u203a hc \u203a en-us \u203a community \u203a posts \u203a 206380409-undo-redo undo / redo \u2013 IDEs Support (IntelliJ Platform) | JetBrains",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "206380409-undo-redo",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Facebook facebook.com \u203a groups \u203a protools \u203a posts \u203a 10159957893499347 Avid Pro Tools Users | Hi, I know the undo shortcut for windows is Ctrl z | Facebook",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "10159957893499347",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Affinity forum.affinity.serif.com \u203a home \u203a affinity support \u203a support & questions \u203a desktop questions (macos and windows) \u203a why the standard shortcut for redo is not ctrl + y Why the standard shortcut for redo is not ctrl + y - Desktop Questions (macOS and Windows) - Affinity | Forum",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "index",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Autodesk Community forums.autodesk.com \u203a t5 \u203a autocad-forum \u203a undo-does-multiple-steps-ctrl-z-and-then-i-cannot-redo \u203a td-p \u203a 7586254 Undo does multiple steps (ctrl-z) and then I cannot redo - Autodesk Community",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "7586254",
+          "position": {
+            "x": 600,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 512,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Stack Exchange ux.stackexchange.com \u203a questions \u203a 108463 \u203a why-were-ctrl-z-and-ctrl-y-chosen-as-undo-redo-shortcuts internationalisation - Why were Ctrl-Z and Ctrl-Y chosen as undo/redo shortcuts? - User Experience Stack Exchange",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Top answer 1 of 2 6 It is likely based on the key position of other commonly used actions (cut, copy, paste) on the keyboard. Source: Why was 'Z' chosen for the CTRL+Z/CMD+Z shortcut? It's also close to the control/command key, which makes it easy to use with one hand. Common actions (cut, copy, paste, undo) are used a lot, so it is important to have them close to the control/command key.",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "\ud83c\udf10 Reddit reddit.com \u203a r/fl_studio \u203a is there a way to to reverse how ctrl+z and ctrl+alt+z works on windows? r/FL_Studio on Reddit: Is there a way to to reverse how Ctrl+Z and Ctrl+Alt+Z works on Windows?",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 688,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Top answer 1 of 3 5 Options>General Settings>Undo History>Alternate undo mode",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "android.view.View",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 0,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": false,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "undo is z but what is redo windows 10",
+          "position": {
+            "x": 281,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 530,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "what is undo and redo in computer",
+          "position": {
+            "x": 637,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 554,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "how to undo and redo",
+          "position": {
+            "x": 281,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 530,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "what is redo on keyboard",
+          "position": {
+            "x": 637,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 554,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "undo is z but what is redo mac",
+          "position": {
+            "x": 281,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 530,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "how to redo in laptop",
+          "position": {
+            "x": 637,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 554,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "undo redo shortcut",
+          "position": {
+            "x": 281,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 530,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "undo is z but what is redo windows 11",
+          "position": {
+            "x": 637,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 554,
+            "y1": 1472,
+            "x2": 720,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Next",
+          "position": {
+            "x": 360,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 266,
+            "y1": 1472,
+            "x2": 454,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Search Premium",
+          "position": {
+            "x": 162,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 292,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Search help",
+          "position": {
+            "x": 162,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 292,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Transparency report",
+          "position": {
+            "x": 162,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 292,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Report a security issue",
+          "position": {
+            "x": 162,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 292,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Status",
+          "position": {
+            "x": 162,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 292,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Browser",
+          "position": {
+            "x": 151,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 270,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Search",
+          "position": {
+            "x": 452,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 332,
+            "y1": 1472,
+            "x2": 572,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Wallet",
+          "position": {
+            "x": 151,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 270,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Talk",
+          "position": {
+            "x": 452,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 332,
+            "y1": 1472,
+            "x2": 572,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Firewall + VPN",
+          "position": {
+            "x": 151,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 270,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Playlist",
+          "position": {
+            "x": 452,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 332,
+            "y1": 1472,
+            "x2": 572,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave News",
+          "position": {
+            "x": 151,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 270,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Rewards",
+          "position": {
+            "x": 452,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 332,
+            "y1": 1472,
+            "x2": 572,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Search API",
+          "position": {
+            "x": 151,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 270,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Brave Ads",
+          "position": {
+            "x": 452,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 332,
+            "y1": 1472,
+            "x2": 572,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Privacy Policy",
+          "position": {
+            "x": 112,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 192,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Terms of Use",
+          "position": {
+            "x": 112,
+            "y": 1472
+          },
+          "bounds": {
+            "x1": 32,
+            "y1": 1472,
+            "x2": 192,
+            "y2": 1472
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Settings",
+          "position": {
+            "x": 469,
+            "y": 1352
+          },
+          "bounds": {
+            "x1": 418,
+            "y1": 1336,
+            "x2": 520,
+            "y2": 1368
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Learn more.",
+          "position": {
+            "x": 328,
+            "y": 1376
+          },
+          "bounds": {
+            "x1": 50,
+            "y1": 1336,
+            "x2": 606,
+            "y2": 1416
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "Close",
+          "position": {
+            "x": 642,
+            "y": 1328
+          },
+          "bounds": {
+            "x1": 614,
+            "y1": 1300,
+            "x2": 670,
+            "y2": 1356
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.widget.Button",
           "resource_id": ""
         },
         {
@@ -6262,7 +8217,7 @@
           "resource_id": "com.brave.browser:id/location_bar_status"
         },
         {
-          "label": "search.brave.com/search?q=bmw+g80&source=android&summary=1&conversation=09112d2b32a1a82d31b8ff6241e423833d9d",
+          "label": "search.brave.com/search?q=undo+is+z+but+what+is+redo&source=android&summary=1&conversation=091a56a3bfc5be0265b7fcfb96545a14167e",
           "position": {
             "x": 310,
             "y": 124
@@ -6435,7 +8390,7 @@
     },
     "Calculator": {
       "package": "com.miui.calculator",
-      "last_explored": "2026-05-17T14:41:58.503181",
+      "last_explored": "2026-05-19T21:55:14.565985",
       "total_elements": 45,
       "elements": [
         {
@@ -7207,7 +9162,7 @@
     },
     "FileManager": {
       "package": "com.miui.android.fashiongallery",
-      "last_explored": "2026-05-17T14:42:05.512309",
+      "last_explored": "2026-05-19T21:55:21.277477",
       "total_elements": 32,
       "elements": [
         {
@@ -7753,6 +9708,80 @@
           "checkable": false,
           "class_name": "android.widget.FrameLayout",
           "resource_id": "com.miui.home:id/default_position"
+        }
+      ]
+    },
+    "Mpesa": {
+      "package": "com.safaricom.mpesa.lifestyle",
+      "last_explored": "2026-05-19T21:55:27.261748",
+      "total_elements": 3,
+      "elements": [
+        {
+          "label": "android.view.View",
+          "position": {
+            "x": 638,
+            "y": 979
+          },
+          "bounds": {
+            "x1": 590,
+            "y1": 931,
+            "x2": 686,
+            "y2": 1027
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "android.view.View",
+          "position": {
+            "x": 193,
+            "y": 1488
+          },
+          "bounds": {
+            "x1": 42,
+            "y1": 1440,
+            "x2": 344,
+            "y2": 1536
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        },
+        {
+          "label": "android.view.View",
+          "position": {
+            "x": 527,
+            "y": 1488
+          },
+          "bounds": {
+            "x1": 376,
+            "y1": 1440,
+            "x2": 678,
+            "y2": 1536
+          },
+          "clickable": true,
+          "checkable": false,
+          "class_name": "android.view.View",
+          "resource_id": ""
+        }
+      ]
+    },
+    "STK": {
+      "package": "com.android.stk",
+      "activity": ".StkMain",
+      "last_explored": "2026-05-19",
+      "total_elements": 0,
+      "elements": [
+        {
+          "label": "SIM Toolkit",
+          "position": {
+            "x": 360,
+            "y": 800
+          },
+          "clickable": true
         }
       ]
     }

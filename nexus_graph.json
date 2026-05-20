@@ -50,12 +50,6 @@
   ],
   "edges": [
     {
-      "relation": "family",
-      "frequency": 1,
-      "source": "Kip",
-      "target": "Mum"
-    },
-    {
       "relation": "brother",
       "frequency": 1,
       "source": "Kip",
@@ -121,6 +115,11 @@
       "frequency": "daily",
       "source": "Kip",
       "target": "spotify"
+    },
+    {
+      "relation": "mum",
+      "source": "Kip",
+      "target": "Mum"
     }
   ]
 }

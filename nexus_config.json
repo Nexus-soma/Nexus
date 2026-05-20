@@ -1,6 +1,6 @@
 {
   "phone_ip": "192.168.100.10",
-  "phone_port": "33201",
+  "phone_port": "44091",
   "user_name": "kip",
   "llm_model": "qwen2.5:0.5b"
 }

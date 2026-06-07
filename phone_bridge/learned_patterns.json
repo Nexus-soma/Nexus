@@ -1,1 +1,23 @@
-{}
+{
+  "Notes:create": {
+    "successes": 5,
+    "failures": 0,
+    "x": 603,
+    "y": 1334,
+    "confidence": 1.0
+  },
+  "Camera:shutter": {
+    "successes": 1,
+    "failures": 0,
+    "x": 360,
+    "y": 1362,
+    "confidence": 1.0
+  },
+  "WhatsApp:message": {
+    "successes": 1,
+    "failures": 0,
+    "x": 561,
+    "y": 1183,
+    "confidence": 1.0
+  }
+}

@@ -248,22 +248,48 @@ class PhoneActions:
     # ─── OPEN APP ───────────────────────────────────
 
     def open_app(self, app_name: str) -> bool:
+        # 1. CHECK PHONE MAP FIRST (dynamic, always up-to-date)
+        for mapped_app, data in self.map_data.get("apps", {}).items():
+            if mapped_app.lower() == app_name.lower():
+                package = data.get("package")
+                if package:
+                    self.bridge.open_app(package)
+                    print(f"   ✅ Opened {app_name} (from phone map).")
+                    return True
+        
+        # 2. FALL BACK to hardcoded APP_MAP
         APP_MAP = {
-            "whatsapp": "com.whatsapp", "telegram": "org.telegram.messenger",
-            "youtube": "app.revanced.android.youtube", "spotify": "com.spotify.music",
-            "brave": "com.brave.browser", "chrome": "com.android.chrome",
-            "notes": "com.miui.notes", "calendar": "com.google.android.calendar",
-            "clock": "com.google.android.deskclock", "calculator": "com.miui.calculator",
-            "settings": "com.android.settings", "dialer": "com.google.android.dialer",
-            "camera": "com.android.camera", "gallery": "com.google.android.apps.photos",
+            "whatsapp": "com.whatsapp",
+            "telegram": "org.telegram.messenger",
+            "youtube": "app.revanced.android.youtube",
+            "youtube music": "app.revanced.android.apps.youtube.music",
+            "spotify": "com.spotify.music",
+            "brave": "com.brave.browser",
+            "chrome": "com.android.chrome",
+            "notes": "com.miui.notes",
+            "calendar": "com.google.android.calendar",
+            "clock": "com.android.deskclock",
+            "calculator": "com.miui.calculator",
+            "settings": "com.android.settings",
+            "dialer": "com.google.android.dialer",
+            "phone": "com.google.android.dialer",
+            "camera": "com.android.camera",
+            "gallery": "com.google.android.apps.photos",
+            "photos": "com.google.android.apps.photos",
             "messages": "com.google.android.apps.messaging",
+            "files": "com.miui.android.fashiongallery",
             "playstore": "com.android.vending",
         }
-        package = APP_MAP.get(app_name.lower(), app_name)
-        self.bridge.open_app(package)
-        print(f"   ✅ Opened {app_name}.")
+        
+        package = APP_MAP.get(app_name.lower())
+        if package:
+            self.bridge.open_app(package)
+            print(f"   ✅ Opened {app_name}.")
+            return True
+        
+        # 3. LAST RESORT: try as raw package name
+        self.bridge.open_app(app_name)
         return True
-
 
 # ─── Quick Stats ────────────────────────────────────
 if __name__ == "__main__":

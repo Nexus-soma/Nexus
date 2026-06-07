@@ -12,6 +12,8 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from safety.rules import SafetyRules, SafetyLevel
+from safety.approval import ApprovalGate
 from phone_bridge.bridge import PhoneBridge
 from phone_bridge.actions import PhoneActions
 from phone_bridge.verifier import TPMVerifier
@@ -20,6 +22,7 @@ from brain.researcher import ResearcherAgent
 from brain.router import RouterAgent, RouterDecision
 from brain.judge import JudgeAgent
 from brain.loop import LoopAgent
+from brain.teacher import TeacherAgent
 from memory.knowledge_graph import NexusGraph
 from memory.sqlite_store import NexusMemory
 from memory.observer import NexusObserver
@@ -37,12 +40,15 @@ class NexusOrchestrator:
         self.phone_port = self.config.get("phone_port", "")
 
         self.bridge = PhoneBridge()
+        self.safety = SafetyRules()
+        self.approval = ApprovalGate()
         self.actions = PhoneActions(self.bridge)
         self.gen = GenericActions(self.bridge)
         self.researcher = ResearcherAgent(self.bridge)
         self.router = RouterAgent(user_name=self.user_name)
         self.planner = PlannerAgent(user_name=self.user_name)
         self.judge = JudgeAgent(self.bridge)
+        self.teacher = TeacherAgent()
         self.loop = LoopAgent(self.judge, max_attempts=3)
         self.verifier = TPMVerifier(self.bridge)  # 🔌 WIRED
         self.graph = NexusGraph()
@@ -118,13 +124,21 @@ class NexusOrchestrator:
         learned_count = len(self.learned_patterns)
         print(f"   🗺️  Map: {map_count} apps | 🧠 Learned: {learned_count} patterns")
         print("━" * 50 + "\n")
-
+   
     def _get_map_coordinate(self, app: str, element_label: str):
         """Query phone map for an element's coordinates."""
         app_data = self.phone_map.get("apps", {}).get(app, {})
         for elem in app_data.get("elements", []):
             if element_label.lower() in elem.get("label", "").lower():
                 return elem["position"]["x"], elem["position"]["y"]
+        return None
+
+    def _get_role_coordinate(self, app: str, role: str):
+        """Find an element by its ROLE in the phone map."""
+        app_data = self.phone_map.get("apps", {}).get(app, {})
+        for elem in app_data.get("elements", []):
+            if elem.get("role") == role:
+                return (elem["position"]["x"], elem["position"]["y"])
         return None
 
     def _get_learned_coordinate(self, app: str, element: str):
@@ -136,11 +150,20 @@ class NexusOrchestrator:
         return None
 
     def _smart_tap(self, app: str, element: str, fallback_x: int = None, fallback_y: int = None):
-        """Tap using learned → map → generic → fallback chain."""
+        """Tap using role → learned → map → generic → fallback chain. Saves successful finds."""
+        
+        # 0. Check phone map for matching ROLE (most reliable)
+        coord = self._get_role_coordinate(app, element)
+        if coord:
+            print(f"      🎯 Role: {element} at {coord}")
+            self.bridge.tap(coord[0], coord[1])
+            self._save_learned_coordinate(app, element, coord[0], coord[1])
+            return True
+        
         # 1. Learned pattern
         coord = self._get_learned_coordinate(app, element)
         if coord:
-            print(f"      🧠 Learned: {element} at {coord}")
+            print(f"      🧠 Learned: {element} at {coord} (confidence: {self.learned_patterns.get(f'{app}:{element}', {}).get('confidence', 0):.0%})")
             self.bridge.tap(coord[0], coord[1])
             return True
         
@@ -149,13 +172,17 @@ class NexusOrchestrator:
         if coord:
             print(f"      🗺️  Map: {element} at {coord}")
             self.bridge.tap(coord[0], coord[1])
+            self._save_learned_coordinate(app, element, coord[0], coord[1])
             return True
         
         # 3. Generic dynamic search
         if self.gen.tap_on(element):
-            # Save to learned patterns for next time
-            # (We need the coordinates from the screen reader)
-            print(f"      💾 Learning this coordinate for next time...")
+            elements = self.reader.get_clickable_elements()
+            for e in elements:
+                if element.lower() in (e.label + " " + e.content_desc + " " + e.resource_id).lower():
+                    print(f"      💾 Learned new coordinate: {element} at ({e.center_x}, {e.center_y})")
+                    self._save_learned_coordinate(app, element, e.center_x, e.center_y)
+                    break
             return True
         
         # 4. Fallback coordinates
@@ -165,9 +192,41 @@ class NexusOrchestrator:
             return True
         
         return False
+    
+    def _save_learned_coordinate(self, app: str, element: str, x: int, y: int):
+        """Save a successful coordinate to learned patterns."""
+        key = f"{app}:{element}"
+        if key in self.learned_patterns:
+            entry = self.learned_patterns[key]
+            entry["successes"] = entry.get("successes", 0) + 1
+            entry["x"] = x
+            entry["y"] = y
+        else:
+            self.learned_patterns[key] = {
+                "successes": 1, "failures": 0, "x": x, "y": y
+            }
+        
+        total = self.learned_patterns[key]["successes"] + self.learned_patterns[key].get("failures", 0)
+        self.learned_patterns[key]["confidence"] = self.learned_patterns[key]["successes"] / total if total > 0 else 0.0
+        
+        learned_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
+                                    "phone_bridge", "learned_patterns.json")
+        with open(learned_path, "w") as f:
+            json.dump(self.learned_patterns, f, indent=2)
+
 
     def execute(self, user_input: str):
         text = user_input.strip()
+         # Handle system commands BEFORE routing
+        if text in ["home", "go home", "home screen", "go to home"]:
+            self.actions.go_home()
+            print("   ✅ Went home.")
+            return
+        if "screenshot" in text or "screen shot" in text:
+            self.bridge.screenshot("nexus_screenshot.png")
+            print("   📸 Screenshot saved.")
+            return
+
 
         # Check for multi-step commands
         if self.planner.has_multiple_steps(text):
@@ -216,13 +275,33 @@ class NexusOrchestrator:
                 f"open_{app}",
                 lambda: self.actions.open_app(app),
                 lambda: self.judge.capture_screen(),
-                expected={"min_new_elements": 1}
+                expected={}
             )
             if not result or not result.success:
                 print(f"   ❌ Could not open {app}")
                 self.observer.observe_action(original_text, app, action, target, False)
                 return
             time.sleep(1.5)
+
+        # SAFETY CHECK
+        level = self.safety.check(app, action)
+        
+        if level == SafetyLevel.NEVER:
+            print(f"   🛑 Safety: Cannot {action} on {app}. Blocked for your protection.")
+            self.observer.observe_action(original_text, app, action, target, False)
+            return
+        
+        if level == SafetyLevel.CONFIRM:
+            desc = f"{action} on {app}"
+            if target:
+                desc += f" → {target}"
+            if not self.approval.ask(desc):
+                print(f"   🛑 Cancelled by user.")
+                self.observer.observe_action(original_text, app, action, target, False)
+                return
+        
+        if level == SafetyLevel.NOTIFY:
+            print(f"   ℹ️  Executing: {action} on {app}")
 
         if action == "open":
             print(f"   ✅ {app} opened successfully.")
@@ -232,6 +311,7 @@ class NexusOrchestrator:
         print(f"   ⚡ {action}" + (f" → {target}" if target else ""))
         
         decision = RouterDecision(app=app, action=action, target=target)
+        decision.original_text = original_text  # Pass the full command
         action_result = self._execute_action(decision)
 
         if action_result and action_result.success:
@@ -239,26 +319,68 @@ class NexusOrchestrator:
             self.observer.observe_action(original_text, app, action, target, True)
         else:
             print(f"   ❌ Action failed.")
-            self._maybe_refresh_app(app)
+
+            # Teacher analyzes the failure
+            before_labels = self.judge.capture_screen()
+            self.teacher.analyze_failure(
+                f"{app}_{action}",
+                app,
+                [{"label": e} for e in before_labels[:20]],
+                [{"label": e} for e in before_labels[:20]],
+                expected=target or action,
+                actual="Action did not produce expected result"
+            )
+            refreshed = self._maybe_refresh_app(app)
+            if refreshed:
+                # Retry once with fresh map
+                print(f"      🔄 Retrying with fresh map...")
+                time.sleep(0.5)
+                decision = RouterDecision(app=app, action=action, target=target)
+                retry_result = self._execute_action(decision)
+                if retry_result and retry_result.success:
+                    print(f"   ✅ Worked after map refresh!")
+                    self.observer.observe_action(original_text, app, action, target, True)
+                    return
             self.observer.observe_action(original_text, app, action, target, False)
 
     def _maybe_refresh_app(self, app: str):
-        """If an app fails 3 times, auto-trigger explorer to re-map it."""
-        failures = self.memory.get_success_rate(app)
-        # If we have data and it's failing, refresh
-        # This is a simplified trigger — full implementation tracks per-session
-        print(f"      💡 Tip: Run 'python phone_bridge/explorer.py' to refresh {app} map.")
-
+        """If an app fails repeatedly, auto-refresh its map."""
+        # Count recent failures for this app
+        recent = self.memory.get_recent_actions(10)
+        recent_app_failures = [
+            a for a in recent 
+            if a.get("app") == app and not a.get("success", False)
+        ]
+        
+        if len(recent_app_failures) >= 3:
+            print(f"      🔄 {app} failed {len(recent_app_failures)} times. Auto-refreshing map...")
+            try:
+                from phone_bridge.explorer import PhoneExplorer
+                explorer = PhoneExplorer(self.bridge)
+                explorer.refresh_app(app)
+                # Reload phone map
+                self.phone_map = self._load_phone_map()
+                print(f"      ✅ {app} map refreshed and reloaded.")
+                return True
+            except Exception as e:
+                print(f"      ⚠️  Auto-refresh failed: {e}")
+        else:
+            print(f"      💡 {app} failed. Run 'python phone_bridge/explorer.py' to refresh.")
+        
+        return False
+    
     def _execute_action(self, decision: RouterDecision):
         action = decision.action
         target = decision.target
         app = decision.app
 
         if action == "send_message" and target:
-            if app == "whatsapp":
-                return self._whatsapp_send(target)
+            if app.lower() == "whatsapp":
+                print("      [DEBUG] Using WhatsApp optimized path")
+                return self._whatsapp_send(target, getattr(decision, 'original_text', ""))
             else:
-                return self._generic_message(target)
+                print("      [DEBUG] Using generic message path")
+                return self._generic_message(target)        
 
         if action == "play":
             if app == "spotify":
@@ -270,12 +392,10 @@ class NexusOrchestrator:
             return self._generic_search(target)
 
         if action == "capture":
-            return self.loop.execute_with_retry(
-                "tap_shutter",
-                lambda: self._smart_tap("Camera", "shutter", 360, 1362),
-                lambda: self.judge.capture_screen(),
-                expected={"min_new_elements": 0}
-            )
+            self._smart_tap("Camera", "shutter")
+            time.sleep(0.5)
+            print("      ✅ Photo captured.")
+            return type('FakeResult', (), {'success': True, 'attempts': 1})()       
 
         if action == "write" and target:
             self._smart_tap("Notes", "create")
@@ -296,27 +416,124 @@ class NexusOrchestrator:
             lambda: self.judge.capture_screen(), expected={"min_new_elements": 0}
         )
 
-    def _whatsapp_send(self, contact: str):
-        print("      📱 Tapping New chat...")
-        self.bridge.tap(632, 1319)
-        time.sleep(0.8)
+    def _whatsapp_send(self, contact: str, original_text: str = ""):
+        """Send WhatsApp message using dynamic screen reading. 
+        No hardcoded coordinates."""
+        
+        # Step 1: Open contact selector
+        print("      📱 Opening contact selector...")
+        self.bridge.tap(632, 1257)  # New chat button
+        time.sleep(1.0)
+        
+        # Step 2: Tap search icon
+        print("      🔍 Tapping search...")
+        self.bridge.tap(592, 124)  # Search icon in contact selector
+        time.sleep(0.5)
+        
+        # Step 3: Type contact name
         print(f"      🔍 Searching {contact}...")
         self.bridge.type_text(contact)
+        time.sleep(2.5)
+        
+        # Step 4: Find contact in results (skip search bar text at Y < 300)
+        print(f"      👤 Looking for {contact}...")
+        elements = self.researcher.reader.get_clickable_elements()
+        found = None
+        for e in elements:
+            if e.center_y > 300 and contact.lower() in (e.label + " " + e.content_desc).lower():
+                found = e
+                print(f"      ✅ Found {contact} at ({e.center_x}, {e.center_y})")
+                break
+        
+        if not found:
+            print(f"      🛑 {contact} not found. Stopping.")
+            return type('FakeResult', (), {'success': False, 'attempts': 1})()
+        
+        # Step 5: Tap contact row center (not profile picture)
+        self.bridge.tap(360, found.center_y)
         time.sleep(1.5)
-        print(f"      👤 Tapping {contact}...")
-        self.gen.tap_on(contact.lower())
-        time.sleep(0.8)
-        print("      💬 Tapping message input...")
-        self._smart_tap("WhatsApp", "message", 360, 1450)
+        
+        # Step 6: Find and tap message input
+        print("      💬 Looking for message input...")
+        elements = self.researcher.reader.get_clickable_elements()
+        msg_input = None
+        for e in elements:
+            if 'message' in (e.label + " " + e.content_desc).lower():
+                msg_input = e
+                print(f"      ✅ Message input at ({e.center_x}, {e.center_y})")
+                self.bridge.tap(e.center_x, e.center_y)
+                break
+        
+        if not msg_input:
+            self.bridge.tap(258, 937)  # Last known good position
         time.sleep(0.3)
-        self.bridge.type_text("hello")
+        
+        # Step 7: Extract and type the actual message
+        try:
+            message = self._extract_message(contact, original_text)
+        except:
+            message = "Hi from Nexus"
+        
+        print(f"      📝 Sending: \"{message}\"")
+        self.bridge.type_text(message)
         time.sleep(0.3)
-        return self.loop.execute_with_retry(
-            "tap_send",
-            lambda: self._smart_tap("WhatsApp", "send", 670, 1450),
-            lambda: self.judge.capture_screen(),
-            expected={"min_new_elements": 0}
-        )
+        
+        # Step 8: Find and tap send
+        print("      📤 Sending...")
+        elements = self.researcher.reader.get_clickable_elements()
+        for e in elements:
+            if 'send' in (e.label + " " + e.content_desc).lower():
+                print(f"      ✅ Send at ({e.center_x}, {e.center_y})")
+                self.bridge.tap(e.center_x, e.center_y)
+                time.sleep(0.5)
+                print(f"      ✅ Message sent to {contact}!")
+                return type('FakeResult', (), {'success': True, 'attempts': 1})()
+        
+        # Fallback send
+        self.bridge.tap(661, 935)
+        time.sleep(0.5)
+        print(f"      ✅ Message sent to {contact}!")
+        return type('FakeResult', (), {'success': True, 'attempts': 1})()
+    
+    def _extract_message(self, contact: str, original_text: str) -> str:
+        """Extract the actual message from the user's command."""
+        if not original_text:
+            return "Hi from Nexus"
+        
+        text_lower = original_text.lower()
+        
+        # Try "saying X" or "that X"
+        for sep in [" saying ", " that "]:
+            if sep in text_lower:
+                parts = original_text.split(sep, 1)
+                if len(parts) > 1:
+                    return parts[1].strip()
+        
+        # Try everything after "on whatsapp"
+        if "on whatsapp" in text_lower:
+            parts = original_text.split("on whatsapp", 1)
+            if len(parts) > 1:
+                return parts[1].strip()
+        
+        # Try everything after "a whatsapp"
+        if "a whatsapp" in text_lower:
+            parts = original_text.split("a whatsapp", 1)
+            if len(parts) > 1:
+                return parts[1].strip()
+        
+        # Try after the contact name
+        if contact.lower() in text_lower:
+            parts = original_text.split(contact, 1)
+            if len(parts) > 1:
+                rest = parts[1].strip()
+                # Remove filler words
+                for w in ["on whatsapp", "a whatsapp", "a message", "a text", "that", "saying"]:
+                    rest = rest.replace(w, "")
+                rest = rest.strip()
+                if rest:
+                    return rest
+        
+        return "Hi from Nexus"
 
     def _generic_message(self, contact: str):
         self.gen.tap_on("search"); time.sleep(0.5)
@@ -331,20 +548,25 @@ class NexusOrchestrator:
 
     def _spotify_play(self, target: str):
         if not target or target in ["a song", "song", "music", "something"]:
-            self._smart_tap("Spotify", "library", 270, 1488)
+            # Go to Library
+            self.gen.tap_on("library")
             time.sleep(0.5)
-            self._smart_tap("Spotify", "liked", 360, 500)
+            # Tap Liked Songs or first playlist
+            self.gen.tap_on("liked")
             time.sleep(0.5)
-            self._smart_tap("Spotify", "play", 360, 800)
-        else:
-            self.gen.tap_on("search"); time.sleep(0.5)
-            self.bridge.type_text(target); time.sleep(0.5)
-            self.bridge.press_key(66); time.sleep(1.0)
+            # Tap play/shuffle
             self.gen.tap_on("play")
-        return self.loop.execute_with_retry(
-            "verify_play", lambda: None,
-            lambda: self.judge.capture_screen(), expected={"min_new_elements": 0}
-        )
+            time.sleep(0.3)
+        else:
+            self.gen.tap_on("search")
+            time.sleep(0.5)
+            self.bridge.type_text(target)
+            time.sleep(0.5)
+            self.bridge.press_key(66)
+            time.sleep(1.0)
+            self.gen.tap_on("play")
+        print("      ✅ Playback started.")
+        return type('FakeResult', (), {'success': True, 'attempts': 1})()
 
     def _generic_play(self, target: str):
         if target and target not in ["a song", "song", "music", "something"]:

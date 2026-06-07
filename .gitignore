@@ -27,3 +27,12 @@ dist/
 
 # OS
 .DS_Store
+
+# Personal data - DO NOT COMMIT
+phone_bridge/phone_map.json
+phone_bridge/learned_patterns.json
+phone_bridge/action_history.json
+phone_bridge/teacher_lessons.json
+nexus_memory.db
+nexus_graph.json
+nexus_config.json

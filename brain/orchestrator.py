@@ -8,10 +8,14 @@ import subprocess
 import sys
 import os
 import time
+import tempfile
+import random
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from voice.tts import TextToSpeech
+from voice.stt import SpeechToText
 from safety.rules import SafetyRules, SafetyLevel
 from safety.approval import ApprovalGate
 from phone_bridge.bridge import PhoneBridge
@@ -42,6 +46,8 @@ class NexusOrchestrator:
         self.bridge = PhoneBridge()
         self.safety = SafetyRules()
         self.approval = ApprovalGate()
+        self.tts = TextToSpeech()
+        self.stt = SpeechToText()
         self.actions = PhoneActions(self.bridge)
         self.gen = GenericActions(self.bridge)
         self.researcher = ResearcherAgent(self.bridge)
@@ -108,23 +114,61 @@ class NexusOrchestrator:
         self.connected = False
 
     def _greeting(self):
+        from rich.console import Console
+        from rich.panel import Panel
+        from rich.text import Text
+        
+        console = Console()
         h = datetime.now().hour
         g = "Good morning" if h < 12 else "Good afternoon" if h < 17 else "Good evening"
-        print("\n" + "━" * 50)
-        print(f"   🌌  N E X U S")
-        print(f"   {g}, {self.user_name}.")
+        
         if self.connected:
             try:
-                print(f"   📱 Connected. Battery: {self.bridge.get_battery_level()}%")
+                battery = self.bridge.get_battery_level()
+                status = f"[green]📱 Connected | Battery: {battery}%[/green]"
             except:
-                print(f"   📱 Connected.")
+                status = "[green]📱 Connected[/green]"
         else:
-            print(f"   ⚠️  Not connected. Type 'setup'")
+            status = "[red]⚠️  Not connected. Type 'setup'[/red]"
+        
         map_count = len(self.phone_map.get("apps", {}))
         learned_count = len(self.learned_patterns)
-        print(f"   🗺️  Map: {map_count} apps | 🧠 Learned: {learned_count} patterns")
-        print("━" * 50 + "\n")
-   
+        
+        text = Text()
+        greeting = self._get_personality_greeting()
+        text.append(f"{greeting}\n", style="bold white")
+        text.append(f"{status}\n")
+        text.append(f"Apps mapped: {map_count} | Learned: {learned_count}\n", style="blue")
+        text.append("Say [bold]\"Hey Nexus\"[/bold] or type a command.\n", style="dim")
+        
+        console.print(Panel(text, title="NEXUS", border_style="blue"))
+        print()
+
+    def _get_personality_greeting(self) -> str:
+        """Return a personality-based greeting based on time."""
+        import random
+        
+        h = datetime.now().hour
+        
+        if h < 12:
+            greetings = [
+                f"Good morning {self.user_name}. Ready to take on the day?",
+                f"Morning {self.user_name}. Coffee first, then we build.",
+                f"Rise and grind, {self.user_name}.",
+            ]
+        elif h < 17:
+            greetings = [
+                f"Good afternoon {self.user_name}. What are we working on?",
+                f"Afternoon. Need me to handle something?",
+            ]
+        else:
+            greetings = [
+                f"Good evening {self.user_name}. Late night building session?",
+                f"Evening. The best code happens after dark.",
+            ]
+        
+        return random.choice(greetings)
+
     def _get_map_coordinate(self, app: str, element_label: str):
         """Query phone map for an element's coordinates."""
         app_data = self.phone_map.get("apps", {}).get(app, {})
@@ -317,6 +361,10 @@ class NexusOrchestrator:
         if action_result and action_result.success:
             print(f"   ✅ Done in {action_result.attempts} attempt(s).")
             self.observer.observe_action(original_text, app, action, target, True)
+            #speak confirmation
+            confirmation = self._get_confirmation_message(app, action, target)
+            if confirmation:
+                self.tts.speak_response(confirmation)
         else:
             print(f"   ❌ Action failed.")
 
@@ -343,6 +391,53 @@ class NexusOrchestrator:
                     return
             self.observer.observe_action(original_text, app, action, target, False)
 
+    def _get_confirmation_message(self, app: str, action: str, target: str) -> str:
+        """Get a spoken confirmation message for an action."""
+        messages = {
+            ("whatsapp", "send_message"): f"Message sent to {target}.",
+            ("camera", "capture"): "Photo captured.",
+            ("notes", "write"): "Note saved.",
+            ("youtube", "search"): f"Searched for {target} on YouTube.",
+            ("spotify", "play"): "Playing music.",
+        }
+
+        #default response
+        if action == "open":
+            return random.choice([f"{app} is open.", f"Here's {app}.", f"Opened {app} for you."])
+        if app.lower() == "whatsapp" and action == "send_message":
+            return random.choice([
+                f"sent to {target}.",
+                f"Message delivered to {target}.",
+                f"{target} will get your message shortly."
+            ])
+        if app.lower() == "camera" and action == "capture":
+            return random.choice([
+                "Got it, photo taken.",
+                "Picture captured.",
+                "Say cheese! Photo saved."
+            ])
+        if app.lower() == "notes" and action == "write":
+            return random.choice([
+                "Note saved.",
+                "Got it, note created.",
+                "Note added."
+            ])
+        if app.lower() == "youtube" and action == "search":
+            return random.choice([
+                f"Searched for {target} on YouTube.",
+                f"Found results for {target} on YouTube.",
+                f"Here are videos about {target}."
+            ])
+        if app.lower() == "spotify" and action == "play":
+            return random.choice([
+                "Playing music.",
+                "Got it, playing {target}.",
+                "Now playing {target}."
+            ])
+
+        return messages.get((app.lower(), action))
+    
+    
     def _maybe_refresh_app(self, app: str):
         """If an app fails repeatedly, auto-refresh its map."""
         # Count recent failures for this app
@@ -592,42 +687,106 @@ class NexusOrchestrator:
         return type('FakeResult', (), {'success': True, 'attempts': 1})()
 
     def chat(self):
+        from rich.console import Console
+        from rich.panel import Panel
+        
+        console = Console()
         self._greeting()
+        console.print(Panel("Type a command or 'voice' to enable listening.", style="green"))
+        print()
+        
         while True:
             try:
                 ui = input(f"🧑 {self.user_name}: ").strip()
-                if not ui: continue
+                
+                if not ui:
+                    continue
+                
                 if ui.lower() == "exit":
-                    print(f"👋 Bye, {self.user_name}."); break
+                    console.print(Panel(f"Goodbye, {self.user_name}.", style="blue"))
+                    break
+                
+                if ui.lower() == "voice":
+                    self.voice_mode = not self.voice_mode
+                    if self.voice_mode:
+                        console.print(Panel("Voice mode ON. Say 'Hey Kip' to activate.", style="green"))
+                        self._listen_once(console)
+                    else:
+                        console.print(Panel("Voice mode OFF.", style="red"))
+                    continue
+                
                 if ui.lower() == "help":
-                    print("   tell mum on whatsapp hello")
-                    print("   play a song")
-                    print("   take a photo")
-                    print("   search youtube for X")
-                    print("   write a note called X")
-                    print("   open instagram / open deriv")
-                    print("   insights / stats")
+                    console.print(Panel(
+                        "voice — toggle voice listening\n"
+                        "tell mum on whatsapp hello\n"
+                        "search youtube for AI\n"
+                        "write a note called shopping\n"
+                        "open camera | setup | stats",
+                        title="Commands", border_style="green"
+                    ))
                     continue
-                if ui.lower() == "insights":
-                    for i in self.observer.get_insights():
-                        print(f"   🧠 {i}")
-                    continue
-                if ui.lower() == "stats":
-                    self.verifier.print_stats()
-                    continue
+                
                 if ui.lower() == "setup":
-                    self.phone_ip = input("   📱 IP: ").strip() or self.phone_ip
-                    self.phone_port = input("   🔌 Port: ").strip() or self.phone_port
-                    self.user_name = input("   👤 Name: ").strip() or self.user_name
+                    self.phone_ip = input("   Phone IP: ").strip() or self.phone_ip
+                    self.phone_port = input("   Port: ").strip() or self.phone_port
+                    self.user_name = input("   Name: ").strip() or self.user_name
                     self._save_config()
                     self.bridge.device_ip = self.phone_ip
                     self.connected = self.bridge.connect(port=self.phone_port)
                     continue
+                
+                if ui.lower() == "stats":
+                    self.verifier.print_stats()
+                    continue
+                
                 self.execute(ui)
+                
             except KeyboardInterrupt:
-                print(f"\n👋 Bye, {self.user_name}."); break
+                console.print(Panel(f"Goodbye, {self.user_name}.", style="blue"))
+                break
             except Exception as e:
-                print(f"   ❌ Error: {e}")
+                console.print(Panel(f"Error: {e}", style="red"))
+    
+    def _listen_once(self, console):
+        """Listen for one wake word activation, then return to typing."""
+        from voice.wake_word import WakeWordDetector
+        wake = WakeWordDetector(self.stt)
+        
+        console.print(Panel("Listening for 'Hey Kip'... (say 'stop' to disable)", style="yellow"))
+        
+        start_time = time.time()
+        while self.voice_mode and (time.time() - start_time) < 60:
+            if wake.listen_for_wake_word(timeout=5):
+                console.print(Panel("Wake word detected!", style="yellow"))
+                self.tts.speak_response("Yes?")
+                time.sleep(0.5)
+                
+                audio_path = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
+                proc = subprocess.Popen(
+                    ["parec", "--format=s16le", "--rate=16000", "--channels=1",
+                     "--file-format=wav", audio_path]
+                )
+                time.sleep(4)
+                proc.terminate()
+                proc.wait()
+                
+                ui = self.stt.transcribe(audio_path)
+                os.remove(audio_path)
+                
+                if ui:
+                    ui = ui.lower().strip()
+                    for filler in ["yes ", "yeah ", "ok ", "okay ", "hey kip "]:
+                        if ui.startswith(filler):
+                            ui = ui[len(filler):]
+                    
+                    if ui in ["stop", "disable", "off", "stop listening"]:
+                        self.voice_mode = False
+                        console.print(Panel("Voice mode OFF.", style="red"))
+                        return
+                    
+                    console.print(Panel(f"🧑 {ui}", style="cyan"))
+                    self.execute(ui)
+                    return
 
 
 if __name__ == "__main__":
